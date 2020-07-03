@@ -12,10 +12,10 @@
 
                 <ul class="navbar-nav">
                     <li>
-                        <a href='#/login' class="btn btn-primary btn-success mr-sm-2" role="button">ログイン</a>
+                        <a href='#/login' class="btn btn-success mr-sm-2" role="button">ログイン</a>
                     </li>
                     <li>
-                        <a href='#/signup' class="btn btn-primary" role="button" >新規登録</a>
+                        <a href='#/signup' class="btn btn-info" role="button" >新規登録</a>
                     </li>
                 </ul>
             </div>
@@ -28,3 +28,9 @@
         name:"header",
     }
 </script>
+
+<style>
+    .navbar {
+        background-color: #000000;
+    }
+</style>
