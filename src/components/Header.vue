@@ -1,26 +1,20 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand " href='/'>acsys</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div >
+        <b-navbar toggleable="lg" type="dark"  variant="dark" fixed-top>
+            <a class="navbar-brand " href='/'>
+                <img src="../../public/favicon.png" width="35" height="35" class="d-inline-block align-top" alt="penguin">
+                acsys</a>
 
-                <ul class="navbar-nav mr-auto">
-                </ul>
+            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-                <ul class="navbar-nav">
-                    <li>
-                        <a href='#/login' class="btn btn-success mr-sm-2" role="button">ログイン</a>
-                    </li>
-                    <li>
-                        <a href='#/signup' class="btn btn-info" role="button" >新規登録</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+            <b-collapse id="nav-collapse" is-nav>
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item href="#/login">ログイン</b-nav-item>
+                    <b-nav-item href="#/signup">新規登録</b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+    </div>
 </template>
 
 <script>
@@ -28,9 +22,3 @@
         name:"header",
     }
 </script>
-
-<style>
-    .navbar {
-        background-color: #000000;
-    }
-</style>
