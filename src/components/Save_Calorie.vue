@@ -1,38 +1,35 @@
 <template>
     <div align="center">
-        <div id="header">
-            <h1>acsys</h1>
-            <ul id="menu">
-                <li><router-link to="/save_calorie"><img src="../assets/カロリー貯金.png" width="80px" height="80px"></router-link></li>
-                <li><img src="../assets/calendar.png" width="80px" height="80px"></li>
-                <li><img src="../assets/training.png" width="80px" height="80px"></li>
-                <li><img src="../assets/SNS.png" width="80px" height="80px"></li>
-                <li>ログアウト</li>
-            </ul>
-        </div>
-
         <div id="body">
 
             <div id="calorie_intake">
                 <p>摂取カロリー</p>
-                <select v-model="selectedfood">
-                    <option disabled value="">食べたものを選択してください</option>
-                    <option v-for="food in foods"  v-bind:value="food.kcal" :key="food.key">
-                        {{food.name}}
-                    </option>
-                </select>
-                <input type="text" v-model="selectedfood" value="selectedfood">kcal
+                <label>
+                    <select v-model="selectedfood">
+                        <option disabled value="">食べたものを選択してください</option>
+                        <option v-for="food in foods"  v-bind:value="food.kcal" :key="food.key">
+                            {{food.name}}
+                        </option>
+                    </select>
+                </label>
+                <label>
+                    <input type="text" v-model="selectedfood" value="selectedfood">kcal
+                </label>
             </div>
 
             <div id="calorie_burned">
                 <p>消費カロリー</p>
-                <select v-model="selectedmotion">
-                    <option disabled value="">行った運動を選択してください</option>
-                    <option v-for="motion in motions" v-bind:value="motion.kcal" :key="motion.key">
-                        {{motion.name}}
-                    </option>
-                </select>
-                <input type="text" v-model="selectedmotion" value="selectedmotion">kcal
+                <label>
+                    <select v-model="selectedmotion">
+                        <option disabled value="">行った運動を選択してください</option>
+                        <option v-for="motion in motions" v-bind:value="motion.kcal" :key="motion.key">
+                            {{motion.name}}
+                        </option>
+                    </select>
+                </label>
+                <label>
+                    <input type="text" v-model="selectedmotion" value="selectedmotion">kcal
+                </label>
             </div>
 
             <div id="calorie_message">
@@ -81,15 +78,6 @@
 </script>
 
 <style scoped>
-    #header{
-        display: flex;
-        border-bottom: 1px solid #888888;
-        width: 100%;
-        position: relative;
-    }
-    #menu{
-        list-style: none;
-    }
     #menu li{
         text-align: center;
         background-color: #aaaaaa;
