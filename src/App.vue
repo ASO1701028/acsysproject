@@ -1,17 +1,21 @@
 <template>
   <div>
-    <Header></Header>
-    <router-view></router-view>
+      <LoginHeader v-if="UserToken"></LoginHeader>
+      <Header v-else-if="!UserToken"></Header>
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
+
   import Header from './components/Header.vue'
+  import LoginHeader from './components/LoginHeader.vue'
 
   export default {
     name: 'App',
     components:{
-      Header,
+        Header,
+        LoginHeader,
     },
     data(){
       return{
