@@ -2,7 +2,9 @@
   <div>
       <LoginHeader v-if="UserToken"></LoginHeader>
       <Header v-else-if="!UserToken"></Header>
-      <router-view></router-view>
+      <transition  mode=”out-in”>
+          <router-view />
+      </transition>
   </div>
 </template>
 
@@ -26,8 +28,15 @@
 </script>
 
 <style>
-  html {
-    background: #E6FFE9;
-    color: #5c905c;
+  /*html {*/
+  /*  background: #E6FFE9;*/
+  /*  color: #5c905c;*/
+  /*}*/
+
+  .v-enter-active, .v-leave-active {
+      transition: opacity .5s;
+  }
+  .v-enter, .v-leave-to {
+      opacity: 0;
   }
 </style>
