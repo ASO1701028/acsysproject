@@ -1,32 +1,35 @@
 <template>
     <div id="#app">
         <section>
-            <div id="login-backstyle">
-                <div id="login-title">
-                    acsys にログイン
-                </div>
-                <div id="error-login" v-if="!ErrorMessage">
-                    メールアドレスかパスワードが間違っています
-                </div>
-                <div>
-                    <label for="Mail"><input type="email" id="Mail" placeholder="メールアドレス" v-model="MailAddress"></label>
-                </div>
-                <div>
-                    <label for="Pass"><input type="Password" id="Pass" placeholder="パスワード" v-model="Password" ></label>
-                </div>
-                <button @click="login"  class="btn-flat-vertical-border">ログイン</button>
-                <UserLogin />
-                <div id="login-new-account" >
-                    <router-link to="/signup" class="cp_link">アカウントの新規作成</router-link>
-                </div>
+            <div id="login-title">
+                acsys にログイン
+            </div>
+            <div id="error-login" v-if="!ErrorMessage">
+                メールアドレスかパスワードが間違っています
+            </div>
+            <div>
+                <label for="Mail"></label>
+                <input type="email" id="Mail" placeholder="メールアドレス" v-model="loginForm.LoginMailAddress">
+            </div>
+            <p class="error">
+                {{ loginValidation.loginMailResult }}
+            </p>
+            <div>
+                <label for="Pass"></label>
+                <input type="Password" id="Pass" placeholder="パスワード" v-model="loginForm.LoginPassword" >
+            </div>
+            <p class="error">
+                {{ loginValidation.loginPassResult }}
+            </p>
+            <button v-on:click="checkFrom" class="btn-flat-vertical-border">ログイン</button>
+            <div id="login-new-account" >
+                <router-link to="/signup" class="cp_link">アカウントの新規作成</router-link>
             </div>
         </section>
     </div>
 </template>
 
 <script>
-
-    import UserLogin from './UserLogin.vue'
 
     const auth = {
         login:function (mail,pass) {
@@ -38,25 +41,54 @@
     };
 
     export default {
-        components:{
-            UserLogin
-        },
         data(){
             return{
-                MailAddress : "",
-                Password: "",
+                loginForm:{
+                    LoginMailAddress : null,
+                    LoginPassword: null,
+                },
                 ErrorMessage:true,
+                loginValidation:{
+                    loginMailResult: "",
+                    loginPassResult:"",
+                },
             }
         },
         methods:{
             login:function () {
                 // eslint-disable-next-line no-unused-vars
-                const check = auth.login(this.MailAddress, this.Password);
+                const check = auth.login(this.loginForm.LoginMailAddress, this.loginForm.LoginPassword);
                 if (check === 1){
                     this.$router.replace("/")
                 }else {
                     this.ErrorMessage = false
                 }
+            },
+            checkFrom: function(event){
+                let LoginMail = false;
+                let LoginPass = false;
+
+                //メールアドレスの入力フォームのバリデーション
+                if (!this.loginForm.LoginMailAddress) {
+                    this.loginValidation.loginMailResult="メールアドレスを入力してください"
+                }else {
+                    LoginMail = true
+                }
+
+                //パスワードの入力フォームのバリデーション
+                if (!this.loginForm.LoginPassword) {
+                    this.loginValidation.loginPassResult="パスワードを入力してください"
+                }else {
+                    LoginPass = true
+                }
+
+                //両方trueの時に実行。loginを呼び出す
+                if(LoginMail === true && LoginPass === true){
+                    this.loginValidation.loginMailResult=""
+                    this.loginValidation.loginPassResult=""
+                    this.login()
+                }
+                event.preventDefault()
             },
         },
     }</script>
@@ -70,19 +102,11 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        margin: 10px 30px;
-    }
-
-    /*背景を白に*/
-    #login-backstyle{
-        margin-top: 60px;
-        background: white;
-        display: inline-block;
     }
 
     /*acsysにログインのスタイル*/
     #login-title{
-        margin-top: 30px;
+        margin-top: 40px;
         font-size: 40px;
         color: #5c905c;
         font-weight: bolder;
@@ -111,7 +135,7 @@
 
     /*エラー文の表示エリア*/
     #error-login{
-        font-size: 23px;
+        font-size: 22px;
         margin-top: 15px;
         color: #ff7d6e;
         background: #ffebe9;
@@ -160,6 +184,11 @@
     .btn-flat-vertical-border:hover {
         background: #283d28;
         color: #FFF;
+    }
+
+    .error{
+        color: red;
+        font-size: 20px;
     }
 
     @media only screen and (max-device-width : 850px) {

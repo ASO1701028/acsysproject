@@ -28,10 +28,6 @@
 </script>
 
 <style>
-  /*html {*/
-  /*  background: #E6FFE9;*/
-  /*  color: #5c905c;*/
-  /*}*/
 
   .v-enter-active, .v-leave-active {
       transition: opacity .5s;
