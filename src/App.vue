@@ -5,6 +5,10 @@
       <transition  mode=”out-in”>
           <router-view />
       </transition>
+<!--      <props-->
+<!--          :string="string"-->
+<!--          @token="tokenEvent"-->
+<!--      ></props>-->
   </div>
 </template>
 
@@ -21,9 +25,15 @@
     },
     data(){
       return{
-        UserToken:""
+          UserToken:"",
+          // string:"",
       }
     },
+      methods:{
+          // tokenEvent(token) {
+          //     this.UserToken = token;
+          // }
+      }
   }
 </script>
 

@@ -36,7 +36,8 @@
             window.alert("mailaddress:" + mail + "\n" + "password:" + pass)
             //ここでAPIに送信
             //結果をリターンする
-            return 2
+            this.loginForm.LoginToken = "fafdskglds"
+            return 1
         }
     };
 
@@ -46,6 +47,7 @@
                 loginForm:{
                     LoginMailAddress : null,
                     LoginPassword: null,
+                    LoginToken:null,
                 },
                 ErrorMessage:true,
                 loginValidation:{
@@ -59,7 +61,8 @@
                 // eslint-disable-next-line no-unused-vars
                 const check = auth.login(this.loginForm.LoginMailAddress, this.loginForm.LoginPassword);
                 if (check === 1){
-                    this.$router.replace("/")
+                    // this.$emit('token',this.loginForm.LoginToken);
+                    this.$router.replace("/Save_Calorie")
                 }else {
                     this.ErrorMessage = false
                 }
