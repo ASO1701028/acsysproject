@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // components
+import SrartTop from "../components/SrartTop";
 import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
 import Save_Calorie from '../components/Save_Calorie';
@@ -12,6 +13,14 @@ export default new Router({
 
 // const router = new Router({
     routes: [
+        {
+            path: '/',
+            name: 'StartTop',
+            component: SrartTop,
+            meta: {
+                isPublic: true
+            }
+        },
         {
             path: '/login',
             name: 'login',
