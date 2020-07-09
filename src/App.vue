@@ -1,8 +1,9 @@
 <template>
   <div>
+
       <LoginHeader v-if="UserToken"></LoginHeader>
       <Header v-else-if="!UserToken"></Header>
-      <transition  mode=”out-in”>
+      <transition>
           <router-view />
       </transition>
 <!--      <props-->
