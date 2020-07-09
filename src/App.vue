@@ -6,11 +6,16 @@
         <input type="button" @click="StartSignUp" value="新規登録" id="HeaderSignInButton" class="btn-flat-vertical-border-signin">
       </div>
     </header>
-    <router-view></router-view>
+<!--    <div id="app">-->
+<!--      <router-link to="/calendar">Calendar</router-link>-->
+<!--    </div>-->
+    <router-view />
   </div>
 </template>
 
 <script>
+  import Calendar from "./components/Calendar";
+
   export default {
     name: 'App',
     data(){
@@ -24,6 +29,9 @@
       },
       StartSignUp:function () {
         this.$router.push("/signup")
+      },
+      components: {
+        Calendar,
       }
     }
   }
