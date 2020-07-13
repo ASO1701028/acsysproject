@@ -57,14 +57,20 @@
         },
         methods: {
             handleDateClick(arg){
-                if(confirm("新しいスケジュールを" + arg.dateStr + "に追加しますか？")){
-                    this.calendarEvents.push({
-                        // add new event data
-                        title: "新規スケジュール",
-                        start: arg.date,
-                        allDay: arg.allDay
-                    })
-                }
+                // if(window.prompt("新しいスケジュールを入力してください","")){
+                //     this.calendarEvents.push({
+                //         // add new event data
+                //         title: "a",
+                //         start: arg.date,
+                //         allDay: arg.allDay
+                //     })
+                // }
+                let schedule = window.prompt("スケジュールを入力してください。","")
+                this.calendarEvents.push({
+                    title: schedule,
+                    start: arg.date,
+                    allDay: arg.allDay
+                })
             }
         }
     };
