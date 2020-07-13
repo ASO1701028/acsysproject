@@ -65,6 +65,7 @@
                 //         allDay: arg.allDay
                 //     })
                 // }
+                //カレンダー
                 let schedule = window.prompt("スケジュールを入力してください。","")
                 this.calendarEvents.push({
                     title: schedule,
