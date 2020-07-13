@@ -1,7 +1,7 @@
 <template>
   <div>
       <LoginHeader v-if="UserToken"></LoginHeader>
-      <Header v-else-if="!UserToken"></Header>
+      <Head v-else-if="!UserToken"></Head>
       <transition  mode=”out-in”>
           <router-view />
       </transition>
@@ -10,13 +10,13 @@
 
 <script>
 
-  import Header from './components/Header.vue'
-  import LoginHeader from './components/LoginHeader.vue'
+  import Head from '@/components/Head.vue'
+  import LoginHeader from '@/components/LoginHeader.vue'
 
   export default {
     name: 'App',
     components:{
-        Header,
+        Head,
         LoginHeader,
     },
     data(){
