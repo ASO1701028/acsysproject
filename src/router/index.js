@@ -31,6 +31,11 @@ export default new Router({
         {
             path: '/Save_Calorie',
             component: Save_Calorie,
+        },
+        {
+            path: "/calendar",
+            name: "calendar",
+            component: () => import("@/components/Calendar")
         }
     ]
 })
