@@ -3,7 +3,7 @@
 
       <LoginHeader v-if="UserToken"></LoginHeader>
       <Header v-else-if="!UserToken"></Header>
-      <transition>
+      <transition mode="out-in">
           <router-view />
       </transition>
 <!--      <props-->
@@ -41,7 +41,7 @@
 <style>
 
   .v-enter-active, .v-leave-active {
-      transition: opacity .5s;
+      transition: opacity .3s;
   }
   .v-enter, .v-leave-to {
       opacity: 0;
