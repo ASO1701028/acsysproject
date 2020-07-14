@@ -33,22 +33,13 @@
 
 <script>
 
-    const auth = {
-        login:function (mail,pass) {
-            window.alert("mailaddress:" + mail + "\n" + "password:" + pass)
-            //ここでAPIに送信
-            // this.loginForm.LoginToken = "fafdskglds"
-            return 1
-        }
-    };
-
     export default {
         data(){
             return{
                 loginForm:{
-                    LoginMailAddress : null,
-                    LoginPassword: null,
-                    LoginToken:null,
+                    LoginMailAddress : "",
+                    LoginPassword:"",
+                    LoginToken:"",
                 },
                 ErrorMessage:true,
                 loginValidation:{
@@ -59,13 +50,21 @@
         },
         methods:{
 
+            getLogin:function (mail,pass) {
+                window.alert("mailaddress:" + mail + "\n" + "password:" + pass)
+                //ここでAPIに送信
+                this.loginForm.LoginToken = "こんばんわ"
+                return 1
+            },
+
             login:function () {
                 //バリデーション
                 if (this.loginValidEmail(this.loginForm.LoginMailAddress) && this.loginValidPass(this.loginForm.LoginPassword)){
-                    const check = auth.login(this.loginForm.LoginMailAddress, this.loginForm.LoginPassword);
+                    const check = this.getLogin(this.loginForm.LoginMailAddress, this.loginForm.LoginPassword);
                     if (check === 1){
                         //ユーザーが存在時
-                        // this.$router.replace("/Save_Calorie")
+                        this.$emit('PushToken', this.loginForm.LoginToken)
+                        this.$router.replace("/Save_Calorie")
                     }else {
                         //エラーや存在しなかった場合
                         console.log("アカウントが存在しないもしくわエラー")
