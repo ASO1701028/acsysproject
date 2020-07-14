@@ -1,8 +1,8 @@
 <template>
   <div>
       <LoginHeader v-if="UserToken"></LoginHeader>
-      <Head v-else-if="!UserToken"></Head>
-      <transition  mode=”out-in”>
+      <Header v-else-if="!UserToken"></Header>
+      <transition mode="out-in">
           <router-view />
       </transition>
   </div>
@@ -10,31 +10,33 @@
 
 <script>
 
-  import Head from '@/components/Head.vue'
-  import LoginHeader from '@/components/LoginHeader.vue'
+  import Header from './components/Header.vue'
+  import LoginHeader from './components/LoginHeader.vue'
 
   export default {
     name: 'App',
     components:{
-        Head,
+        Header,
         LoginHeader,
     },
     data(){
       return{
-        UserToken:""
+          UserToken:"",
+          // string:"",
       }
     },
+      methods:{
+          // tokenEvent(token) {
+          //     this.UserToken = token;
+          // }
+      }
   }
 </script>
 
 <style>
-  /*html {*/
-  /*  background: #E6FFE9;*/
-  /*  color: #5c905c;*/
-  /*}*/
 
   .v-enter-active, .v-leave-active {
-      transition: opacity .5s;
+      transition: opacity .3s;
   }
   .v-enter, .v-leave-to {
       opacity: 0;

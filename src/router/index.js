@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // components
+import StartTop from "../components/SrartTop";
 import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
+import UserGuide from "../components/UserGuide";
 import Save_Calorie from '../components/Save_Calorie';
 import test from "../components/test";
 
@@ -13,6 +15,14 @@ export default new Router({
 
 // const router = new Router({
     routes: [
+        {
+            path: '/',
+            name: 'StartTop',
+            component: StartTop,
+            meta: {
+                isPublic: true
+            }
+        },
         {
             path: '/login',
             name: 'login',
@@ -25,6 +35,14 @@ export default new Router({
             path: '/signup',
             name: 'signup',
             component: UserSignUp,
+            meta: {
+                isPublic: true
+            }
+        },
+        {
+            path: '/userguide',
+            name: 'userguide',
+            component: UserGuide,
             meta: {
                 isPublic: true
             }
