@@ -1,45 +1,42 @@
 <template>
   <div>
-
+<!--  headerの設定-->
       <LoginHeader v-if="UserToken"></LoginHeader>
-      <Header v-else-if="!UserToken"></Header>
+      <TopHeader v-else-if="!UserToken"></TopHeader>
       <transition mode="out-in">
-          <router-view />
+          <router-view @PushToken="tokenEvent" />
       </transition>
-<!--      <props-->
-<!--          :string="string"-->
-<!--          @token="tokenEvent"-->
-<!--      ></props>-->
   </div>
 </template>
 
 <script>
 
-  import Header from './components/Header.vue'
+  import TopHeader from './components/TopHeader.vue'
   import LoginHeader from './components/LoginHeader.vue'
 
   export default {
     name: 'App',
     components:{
-        Header,
+        TopHeader,
         LoginHeader,
     },
     data(){
       return{
           UserToken:"",
-          // string:"",
       }
     },
       methods:{
-          // tokenEvent(token) {
-          //     this.UserToken = token;
-          // }
+        //Tokenの格納
+          tokenEvent(token) {
+              this.UserToken = token;
+              console.log(this.UserToken)
+          }
       }
   }
 </script>
 
 <style>
-
+    /*アニメーションの設定*/
   .v-enter-active, .v-leave-active {
       transition: opacity .3s;
   }
