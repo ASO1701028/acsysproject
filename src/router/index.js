@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
 import Save_Calorie from '../components/Save_Calorie';
+import test from "../components/test";
 
 Vue.use(Router)
 
@@ -31,6 +32,10 @@ export default new Router({
         {
             path: '/Save_Calorie',
             component: Save_Calorie,
+        },
+        {
+            path: '/test',
+            component: test,
         },
         {
             path: "/calendar",
