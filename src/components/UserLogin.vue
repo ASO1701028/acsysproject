@@ -7,21 +7,23 @@
             <div id="error-login" v-if="!ErrorMessage">
                 メールアドレスかパスワードが間違っています
             </div>
-            <div>
-                <label for="Mail"></label>
-                <input type="email" id="Mail" placeholder="メールアドレス" v-model="loginForm.LoginMailAddress">
-            </div>
-            <p class="error">
-                {{ loginValidation.loginMailResult }}
-            </p>
-            <div>
-                <label for="Pass"></label>
-                <input type="Password" id="Pass" placeholder="パスワード" v-model="loginForm.LoginPassword" >
-            </div>
-            <p class="error">
-                {{ loginValidation.loginPassResult }}
-            </p>
-            <button v-on:click="checkFrom" class="btn-flat-vertical-border">ログイン</button>
+            <form>
+                <div>
+                    <label for="Mail"></label>
+                    <input type="email" id="Mail" placeholder="メールアドレス" v-model="loginForm.LoginMailAddress">
+                </div>
+                <p class="error">
+                    {{ loginValidation.loginMailResult }}
+                </p>
+                <div>
+                    <label for="Pass"></label>
+                    <input type="Password" id="Pass" placeholder="パスワード" v-model="loginForm.LoginPassword" >
+                </div>
+                <p class="error">
+                    {{ loginValidation.loginPassResult }}
+                </p>
+                <button v-on:click="checkFrom" class="btn-flat-vertical-border">ログイン</button>
+            </form>
             <div id="login-new-account" >
                 <router-link to="/signup" class="cp_link">アカウントの新規作成</router-link>
             </div>
@@ -35,8 +37,7 @@
         login:function (mail,pass) {
             window.alert("mailaddress:" + mail + "\n" + "password:" + pass)
             //ここでAPIに送信
-            //結果をリターンする
-            this.loginForm.LoginToken = "fafdskglds"
+            // this.loginForm.LoginToken = "fafdskglds"
             return 1
         }
     };
@@ -57,16 +58,25 @@
             }
         },
         methods:{
+
             login:function () {
-                // eslint-disable-next-line no-unused-vars
-                const check = auth.login(this.loginForm.LoginMailAddress, this.loginForm.LoginPassword);
-                if (check === 1){
-                    // this.$emit('token',this.loginForm.LoginToken);
-                    this.$router.replace("/Save_Calorie")
+                //バリデーション
+                if (this.loginValidEmail(this.loginForm.LoginMailAddress) && this.loginValidPass(this.loginForm.LoginPassword)){
+                    const check = auth.login(this.loginForm.LoginMailAddress, this.loginForm.LoginPassword);
+                    if (check === 1){
+                        //ユーザーが存在時
+                        // this.$router.replace("/Save_Calorie")
+                    }else {
+                        //エラーや存在しなかった場合
+                        console.log("アカウントが存在しないもしくわエラー")
+                        this.ErrorMessage = false
+                    }
                 }else {
+                    // バリデーションにはじかれた場合
                     this.ErrorMessage = false
                 }
             },
+
             checkFrom: function(event){
                 let LoginMail = false;
                 let LoginPass = false;
@@ -74,6 +84,7 @@
                 //メールアドレスの入力フォームのバリデーション
                 if (!this.loginForm.LoginMailAddress) {
                     this.loginValidation.loginMailResult="メールアドレスを入力してください"
+                    console.log("メールアドレスの文字が入力されていない")
                 }else {
                     LoginMail = true
                 }
@@ -81,6 +92,7 @@
                 //パスワードの入力フォームのバリデーション
                 if (!this.loginForm.LoginPassword) {
                     this.loginValidation.loginPassResult="パスワードを入力してください"
+                    console.log("パスワードの文字が入力されていない")
                 }else {
                     LoginPass = true
                 }
@@ -92,6 +104,36 @@
                     this.login()
                 }
                 event.preventDefault()
+            },
+
+            //メールアドレスの厳格なバリデーション
+            loginValidEmail: function (email) {
+                let ValidateEmail = true;
+                let re = /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/;
+                if (!re.test(email)){
+                    ValidateEmail = false;
+                    console.log("メールアドレスに使用できない文字が含まれています")
+                }
+                if (email.length >= 200){
+                    ValidateEmail = false;
+                    console.log("メールアドレスの文字数オーバー")
+                }
+                return ValidateEmail;
+            },
+
+            //パスワードの厳格なバリデーション
+            loginValidPass: function (pass) {
+                let ValidatePassword = true;
+                let re = /^(?=.*?[a-z])(?=.*?[A-Z])[a-zA-Z\d]{6,128}$/;
+                if (!re.test(pass)){
+                    ValidatePassword = false;
+                    console.log("パスワードに使用できない文字が含まれています")
+                }
+                if (pass.length >= 128 || pass.length <= 5){
+                    ValidatePassword = false;
+                    console.log("パスワードの文字数が足りないもしくわ多い")
+                }
+                return ValidatePassword;
             },
         },
     }</script>
