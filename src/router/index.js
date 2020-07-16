@@ -12,7 +12,6 @@ Vue.use(Router)
 
 export default new Router({
 
-// const router = new Router({
     routes: [
         {
             path: '/',
@@ -52,11 +51,3 @@ export default new Router({
         }
     ]
 })
-
-// router.beforeEach((to,from,next)=>{
-//     if(to.matched.some(page => page.meta.isPublic) || Store.state.auth.token) {
-//         next()
-//     }else {
-//         next('/login')
-//     }
-// })
