@@ -20,8 +20,7 @@
     export default {
         methods:{
             logout(){
-                this.$emit('PushToken', "")
-                this.$router.replace("/")
+                this.$emit('deleteToken')
             }
         }
     }

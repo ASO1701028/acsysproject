@@ -33,7 +33,9 @@
 
 <script>
 
+
     export default {
+
         data(){
             return{
                 loginForm:{
@@ -64,7 +66,6 @@
                     if (check === 1){
                         //ユーザーが存在時
                         this.$emit('PushToken', this.loginForm.LoginToken)
-                        this.$router.replace("/Save_Calorie")
                     }else {
                         //エラーや存在しなかった場合
                         console.log("アカウントが存在しないもしくわエラー")
