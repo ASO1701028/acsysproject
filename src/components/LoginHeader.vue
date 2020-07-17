@@ -1,6 +1,6 @@
 <template>
     <div >
-        <b-navbar toggleable="lg" type="dark"  variant="dark" fixed-top>
+        <b-navbar toggleable="lg" type="dark"  variant="dark" fixed="top">
             <a class="navbar-brand " href='/#/Save_Calorie'>
                 <img src="../../public/favicon.png" width="35" height="35" class="d-inline-block align-top" alt="penguin">
                 acsys</a>
