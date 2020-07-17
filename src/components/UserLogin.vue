@@ -151,7 +151,7 @@
 
     /*acsysにログインのスタイル*/
     #login-title{
-        margin-top: 40px;
+        margin-top: 110px;
         font-size: 40px;
         color: #5c905c;
         font-weight: bolder;
