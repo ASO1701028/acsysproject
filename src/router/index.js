@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
 import Save_Calorie from '../components/Save_Calorie';
+import Training from "../components/Training";
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
             path: "/calendar",
             name: "calendar",
             component: () => import("@/components/Calendar")
+        },
+        {
+            path: "/training",
+            name: "training",
+            component: Training,
         }
     ]
 })
