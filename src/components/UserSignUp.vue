@@ -237,7 +237,7 @@
                 //let Sign = false;
 
                 // メールアドレスの入力フォームのバリデーション
-                if ("" === this.SignupForm.UserAddress) {
+                if ("" === this.SignupForm.UserAddress || undefined === this.SignupForm.UserAddress) {
                     this. SignupValidation.SignupAddressResult  = "メールアドレスを入力してください"
                     console.log("メールアドレスが入力されていない")
                 } else {
@@ -245,7 +245,7 @@
                 }
 
                 // パスワードの入力フォームのバリデーション
-                if ("" === this.SignupForm.UserPass) {
+                if ("" === this.SignupForm.UserPass || undefined === this.SignupForm.UserPass) {
                     this.SignupValidation.SignupPasswordResult = "パスワードを入力してください"
                     console.log("パスワードが入力されていない")
                 } else {
@@ -253,7 +253,7 @@
                 }
 
                 // 氏名の入力フォームのバリデーション
-                if ("" === this.SignupForm.UserName) {
+                if ("" === this.SignupForm.UserName || undefined === this.SignupForm.UserName) {
                     this.SignupValidation.SignupNameResult = "氏名を入力してください"
                     console.log("氏名が入力されていない")
                 } else {
@@ -261,7 +261,7 @@
                 }
 
                 // 生年月日の入力フォームのバリデーション
-                if ("" === this.SignupForm.UserBirthday) {
+                if ("" === this.SignupForm.UserBirthday || undefined === this.SignupForm.UserBirthday) {
                     this.SignupValidation.SignupBirthdayResult = "生年月日を入力してください"
                     console.log("生年月日が入力されていない")
                 } else {
@@ -269,7 +269,7 @@
                 }
 
                 // 体重の入力フォームのバリデーション
-                if ("" === this.SignupForm.UserWeight) {
+                if ("" === this.SignupForm.UserWeight || undefined === this.SignupForm.UserWeight) {
                     this.SignupValidation.SignupWeightResult = "体重を入力してください"
                     console.log("体重が入力されていない")
                 } else {
@@ -277,7 +277,7 @@
                 }
 
                 // 身長の入力フォームのバリデーション
-                if ("" === this.SignupForm.UserHeight) {
+                if ("" === this.SignupForm.UserHeight || undefined === this.SignupForm.UserHeight) {
                     this.SignupValidation.SignupHeightResult = "身長を入力してください"
                     console.log("身長が入力されていない")
                 } else {
