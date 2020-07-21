@@ -38,8 +38,8 @@
                 <!-- /default -->
                 <!-- footer スロットコンテンツ -->
                 <template slot="footer">
-                    <button class="btn-flat-vertical-border" @click="closeModal">キャンセル</button>
-                    <button class="btn-flat-vertical-border" @click="logout">ログアウト</button>
+                    <button class="btn-flat-cancel" @click="closeModal">キャンセル</button>
+                    <button class="btn-flat-red" @click="logout">ログアウト</button>
                 </template>
                 <!-- /footer -->
             </MyModal>
@@ -73,7 +73,7 @@
 </script>
 
 <style scoped>
-    .btn-flat-vertical-border {
+    .btn-flat-red {
         font-size: 15px;
         position: relative;
         display: inline-block;
@@ -83,12 +83,31 @@
         border-left: solid 4px #FF839007;
         border-right: solid 4px #FF839007;
         color: #ffffff;
-        background: #5c905c;
+        background: #90645c;
         transition: .4s;
     }
 
-    .btn-flat-vertical-border:hover {
-        background: #283d28;
+    .btn-flat-red:hover {
+        background: #5f120d;
+        color: #FFF;
+    }
+
+    .btn-flat-cancel {
+        font-size: 15px;
+        position: relative;
+        display: inline-block;
+        font-weight: bold;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        border-left: solid 4px #FF839007;
+        border-right: solid 4px #FF839007;
+        color: #ffffff;
+        background: #6e905c;
+        transition: .4s;
+    }
+
+    .btn-flat-cancel:hover {
+        background: #0d5f21;
         color: #FFF;
     }
 </style>
