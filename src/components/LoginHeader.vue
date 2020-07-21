@@ -22,24 +22,73 @@
 <!--                            Apiで名前の取得-->
                         </template>
                         <b-dropdown-item href="#">登録情報の変更</b-dropdown-item>
-                        <b-dropdown-item @click="logout" class="text-danger">ログアウト</b-dropdown-item>
+                        <b-dropdown-item @click="openModal">ログアウト</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
 
             </b-collapse>
         </b-navbar>
+
+
+        <div class="example-modal-window">
+            <!-- コンポーネント MyModal -->
+            <MyModal @close="closeModal" v-if="modal">
+                <!-- default スロットコンテンツ -->
+                <div class="text-danger h3">ログアウトしますか？</div>
+                <!-- /default -->
+                <!-- footer スロットコンテンツ -->
+                <template slot="footer">
+                    <button class="btn-flat-vertical-border" @click="closeModal">キャンセル</button>
+                    <button class="btn-flat-vertical-border" @click="logout">ログアウト</button>
+                </template>
+                <!-- /footer -->
+            </MyModal>
+        </div>
     </div>
 </template>
 
 <script>
+
+    import MyModal from './MyModal'
+
     export default {
+        components: { MyModal },
+        data() {
+            return {
+                modal: false,
+            }
+        },
         methods:{
+            openModal(){
+                this.modal = true
+            },
+            closeModal() {
+                this.modal = false
+            },
             logout(){
                 this.$emit('deleteToken')
-            }
+            },
         }
     }
 </script>
 
 <style scoped>
+    .btn-flat-vertical-border {
+        font-size: 15px;
+        position: relative;
+        display: inline-block;
+        font-weight: bold;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        border-left: solid 4px #FF839007;
+        border-right: solid 4px #FF839007;
+        color: #ffffff;
+        background: #5c905c;
+        transition: .4s;
+    }
+
+    .btn-flat-vertical-border:hover {
+        background: #283d28;
+        color: #FFF;
+    }
 </style>

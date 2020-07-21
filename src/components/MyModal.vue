@@ -32,16 +32,16 @@
 
         &-window {
             background: #fff;
-            border-radius: 4px;
+            border-radius: 5px;
             overflow: hidden;
         }
 
         &-content {
-            padding: 10px 20px;
+            padding: 20px 30px;
         }
 
         &-footer {
-            background: #ccc;
+            background: #fff;
             padding: 10px;
             text-align: right;
         }
