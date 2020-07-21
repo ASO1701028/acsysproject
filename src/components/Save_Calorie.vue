@@ -1,92 +1,117 @@
 <template>
-    <div align="center">
-        <div id="body">
+<!--    <div align="center">-->
+<!--        <div id="body">-->
 
-            <div id="calorie_intake">
-                <p>摂取カロリー</p>
-                <label>
-                    <select v-model="selectedfood">
-                        <option disabled value="">食べたものを選択してください</option>
-                        <option v-for="food in foods"  v-bind:value="food.kcal" :key="food.key">
-                            {{food.name}}
-                        </option>
-                    </select>
-                </label>
-                <label>
-                    <input type="text" v-model="selectedfood" value="selectedfood">kcal
-                </label>
-            </div>
+<!--            <div id="calorie_intake">-->
+<!--                <p>摂取カロリー</p>-->
+<!--                <label>-->
+<!--                    <select v-model="selectedfood">-->
+<!--                        <option disabled value="">食べたものを選択してください</option>-->
+<!--                        <option v-for="food in foods"  v-bind:value="food.kcal" :key="food.key">-->
+<!--                            {{food.name}}-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                    <input type="text" v-model="selectedfood" value="selectedfood">kcal-->
+<!--                </label>-->
+<!--            </div>-->
 
-            <div id="calorie_burned">
-                <p>消費カロリー</p>
-                <label>
-                    <select v-model="selectedmotion">
-                        <option disabled value="">行った運動を選択してください</option>
-                        <option v-for="motion in motions" v-bind:value="motion.kcal" :key="motion.key">
-                            {{motion.name}}
-                        </option>
-                    </select>
-                </label>
-                <label>
-                    <input type="text" v-model="selectedmotion" value="selectedmotion">kcal
-                </label>
-            </div>
+<!--            <div id="calorie_burned">-->
+<!--                <p>消費カロリー</p>-->
+<!--                <label>-->
+<!--                    <select v-model="selectedmotion">-->
+<!--                        <option disabled value="">行った運動を選択してください</option>-->
+<!--                        <option v-for="motion in motions" v-bind:value="motion.kcal" :key="motion.key">-->
+<!--                            {{motion.name}}-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                    <input type="text" v-model="selectedmotion" value="selectedmotion">kcal-->
+<!--                </label>-->
+<!--            </div>-->
 
-            <div id="calorie_message">
-                <p>今までの合計カロリーの差分は</p>
-                <p style="font-size: 24pt">{{selectedfood - selectedmotion}}だよ！</p>
-            </div>
+<!--            <div id="calorie_message">-->
+<!--                <p>今までの合計カロリーの差分は</p>-->
+<!--                <p style="font-size: 24pt">{{selectedfood - selectedmotion}}だよ！</p>-->
+<!--            </div>-->
 
-        </div>
+<!--        </div>-->
+<!--    </div>-->
+    <div>
+        <p>テスト！{{this.token}}</p>
+        <p>テスト！{{this.token}}</p>
+        <p>テスト！{{this.token}}</p>
+        <p>テスト！{{this.token}}</p>
+        <p>テスト！{{this.token}}</p>
     </div>
 </template>
 
 <script>
+    import Cookies from "js-cookie";
+
     export default {
         name: "save_calorie",
-        data:function () {
-            let selectedfood = '';
-            let foods = [
-                {
-                    id:1, name:"ご飯", kcal:168,
-                },
-                {
-                    id:2, name:"パン", kcal:177,
-                },
-                {
-                    id:3, name:"焼きそば", kcal:570,
-                },
-                {
-                    id:4, name:"お好み焼き", kcal:553,
-                }
-            ];
-            let selectedmotion = '';
-            let motions = [
-                {
-                    id:1, name:"ランニング", kcal:300,
-                }
-            ];
-
-            return {
-                selectedfood:selectedfood,
-                foods:foods,
-                selectedmotion:selectedmotion,
-                motions:motions,
-            }
+        data(){
+          return{
+              token:null,
+          }
         },
+        created() {
+            this.token = Cookies.get('token')
+
+            if (!this.token){
+                this.$router.replace("/")
+            }
+        }
+        // data:function () {
+        //     let selectedfood = '';
+        //     let foods = [
+        //         {
+        //             id:1, name:"ご飯", kcal:168,
+        //         },
+        //         {
+        //             id:2, name:"パン", kcal:177,
+        //         },
+        //         {
+        //             id:3, name:"焼きそば", kcal:570,
+        //         },
+        //         {
+        //             id:4, name:"お好み焼き", kcal:553,
+        //         }
+        //     ];
+        //     let selectedmotion = '';
+        //     let motions = [
+        //         {
+        //             id:1, name:"ランニング", kcal:300,
+        //         }
+        //     ];
+        //
+        //     return {
+        //         selectedfood:selectedfood,
+        //         foods:foods,
+        //         selectedmotion:selectedmotion,
+        //         motions:motions,
+        //     }
+        // },
     }
 </script>
 
 <style scoped>
-    #menu li{
-        text-align: center;
-        background-color: #aaaaaa;
-        display: inline-block;
-        margin-right: 2px;
-        width: 80px;
-        height: 80px;
-        line-height: 80px;
-        border-radius: 50%;
-        overflow: hidden;
+    p{
+        font-size: 5em;
+        margin-top: 60px;
     }
+    /*#menu li{*/
+    /*    text-align: center;*/
+    /*    background-color: #aaaaaa;*/
+    /*    display: inline-block;*/
+    /*    margin-right: 2px;*/
+    /*    width: 80px;*/
+    /*    height: 80px;*/
+    /*    line-height: 80px;*/
+    /*    border-radius: 50%;*/
+    /*    overflow: hidden;*/
+    /*}*/
 </style>

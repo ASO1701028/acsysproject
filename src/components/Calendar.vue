@@ -8,6 +8,7 @@
                 :plugins="calendarPlugins"
                 :events="calendarEvents"
                 @dateClick="handleDateClick"
+                @eventClick="eventClick"
         />
     </div>
 </template>
@@ -17,7 +18,9 @@
     import dayGridPlugin from '@fullcalendar/daygrid'
     import timeGridPlugin from '@fullcalendar/timegrid'
     import interactionPlugin from '@fullcalendar/interaction'
+    import listPlugin from '@fullcalendar/list';
     import jaLocale from '@fullcalendar/core/locales/ja' // 日本語化用
+    let schedule;
 
     export default {
         components: {
@@ -34,8 +37,9 @@
                 },
                 calendarWeekends: true, // 土日を表示するか
                 // カレンダーで使用するプラグイン
-                calendarPlugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-                // カレンダーに表示するスケジュール一覧
+                calendarPlugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
+                editable: true,
+               // カレンダーに表示するスケジュール一覧
                 calendarEvents: [
                     {
                         title: "報告会",
@@ -51,21 +55,42 @@
                         title: "打ち合わせ",
                         start: "2020-03-18T13:30:00",
                         end: "2020-03-18T14:30:00"
+                    },
+                    {
+
+                        title: "平原、ロボットになる",
+                        start: "2020-07-18T13:30:00",
+                        end: "2020-07-18T14:30:00",
+
                     }
                 ]
             };
         },
         methods: {
+            // カレンダー
             handleDateClick(arg){
-                if(confirm("新しいスケジュールを" + arg.dateStr + "に追加しますか？")){
+                schedule = window.prompt("スケジュールを入力してください。","")
+                if(schedule != null && schedule != "") {
                     this.calendarEvents.push({
-                        // add new event data
-                        title: "新規スケジュール",
+                        title: schedule,
                         start: arg.date,
                         allDay: arg.allDay
                     })
                 }
+            },
+            eventClick: function(info){
+                schedule = prompt("編集", info.event.title)
+                if(schedule != null && schedule != ""){
+                    alert(schedule)
+                }
+                info.el.style.borderColor = 'red';
             }
+
+            // youtubeへ遷移
+            // handleDateClick(){
+            //     location.href = "https://www.youtube.com";
+            // }
+
         }
     };
 </script>

@@ -1,6 +1,7 @@
 <template>
     <div id="#app">
-        未実装
+        <p>未実装</p>
+
     </div>
 </template>
 
@@ -11,5 +12,8 @@
 </script>
 
 <style scoped>
-
+    p{
+        position: relative;
+        top: 60px;
+    }
 </style>

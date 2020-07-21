@@ -7,13 +7,12 @@ import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
 import UserGuide from "../components/UserGuide";
 import Save_Calorie from '../components/Save_Calorie';
-import test from "../components/test";
+// import Training from "../components/Training";
 
 Vue.use(Router)
 
 export default new Router({
 
-// const router = new Router({
     routes: [
         {
             path: '/',
@@ -52,21 +51,14 @@ export default new Router({
             component: Save_Calorie,
         },
         {
-            path: '/test',
-            component: test,
-        },
-        {
             path: "/calendar",
             name: "calendar",
             component: () => import("@/components/Calendar")
-        }
+        },
+        // {
+        //     path: "/training",
+        //     name: "training",
+        //     component: Training,
+        // }
     ]
 })
-
-// router.beforeEach((to,from,next)=>{
-//     if(to.matched.some(page => page.meta.isPublic) || Store.state.auth.token) {
-//         next()
-//     }else {
-//         next('/login')
-//     }
-// })
