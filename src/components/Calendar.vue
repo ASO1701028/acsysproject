@@ -70,7 +70,7 @@
             // カレンダー
             handleDateClick(arg){
                 schedule = window.prompt("スケジュールを入力してください。","")
-                if(schedule != null && schedule != "") {
+                if(schedule != null && schedule !== "") {
                     this.calendarEvents.push({
                         title: schedule,
                         start: arg.date,
@@ -80,7 +80,7 @@
             },
             eventClick: function(info){
                 schedule = prompt("編集", info.event.title)
-                if(schedule != null && schedule != ""){
+                if(schedule != null && schedule !== ""){
                     alert(schedule)
                 }
                 info.el.style.borderColor = 'red';
