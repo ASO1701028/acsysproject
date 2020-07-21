@@ -63,7 +63,7 @@
                     <input type="email" class="input-form-text" id="MailAddress" v-model="SignupForm.UserAddress">
                 </div>
                 <p class="error">
-                    {{ SignupValidation.SignupAdressResult }}
+                    {{ SignupValidation.SignupAddressResult }}
                 </p>
 
                 <!--パスワード -->
@@ -123,8 +123,8 @@
                         </table>
                     </div>
                 </div>
-                <button @click="signup"  class="btn-flat-vertical-border">登録</button>
-                <!--<button v-on:click="checkFrom" class="btn-flat-vertical-border">登録</button>-->
+                <button @click="checkForm"  class="btn-flat-vertical-border">登録</button>
+                <!--<button v-on:click="checkError" class="btn-flat-vertical-border">登録</button>-->
             </div>
         </section>
     </div>
@@ -237,7 +237,7 @@
                 //let Sign = false;
 
                 // メールアドレスの入力フォームのバリデーション
-                if (!this.SignupForm.UserAddress) {
+                if ("" === this.SignupForm.UserAddress) {
                     this.SignupValidation.SignupAddressResult = "メールアドレスを入力してください"
                     console.log("メールアドレスが入力されていない")
                 } else {
@@ -245,7 +245,7 @@
                 }
 
                 // パスワードの入力フォームのバリデーション
-                if (!this.SignupForm.UserPass) {
+                if ("" === this.SignupForm.UserPass) {
                     this.SignupValidation.SignupPasswordResult = "パスワードを入力してください"
                     console.log("パスワードが入力されていない")
                 } else {
@@ -253,7 +253,7 @@
                 }
 
                 // 氏名の入力フォームのバリデーション
-                if (!this.SignupForm.UserName) {
+                if ("" === this.SignupForm.UserName) {
                     this.SignupValidation.SignupNameResult = "氏名を入力してください"
                     console.log("氏名が入力されていない")
                 } else {
@@ -261,7 +261,7 @@
                 }
 
                 // 生年月日の入力フォームのバリデーション
-                if (!this.SignupForm.UserBirthday) {
+                if ("" === this.SignupForm.UserBirthday) {
                     this.SignupValidation.SignupBirthdayResult = "生年月日を入力してください"
                     console.log("生年月日が入力されていない")
                 } else {
@@ -269,7 +269,7 @@
                 }
 
                 // 体重の入力フォームのバリデーション
-                if (!this.SignupForm.UserWeight) {
+                if ("" === this.SignupForm.UserWeight) {
                     this.SignupValidation.SignupWeightResult = "体重を入力してください"
                     console.log("体重が入力されていない")
                 } else {
@@ -277,7 +277,7 @@
                 }
 
                 // 身長の入力フォームのバリデーション
-                if (!this.SignupForm.UserHeight) {
+                if ("" === this.SignupForm.UserHeight) {
                     this.SignupValidation.SignupHeightResult = "身長を入力してください"
                     console.log("身長が入力されていない")
                 } else {
@@ -306,10 +306,12 @@
                 if (!re.test(email)) {
                     Validataemail = false;
                     console.log("メールアドレスに使用できない文字が含まれています")
+                    return Validataemail;
                 }
-                if (email.length >= 200) {
+                if (email.length >= 20) {
                     Validataemail = false;
                     console.log("メールアドレスの文字数オーバー")
+                    return Validataemail;
                 }
                 return Validataemail;
             },
@@ -321,12 +323,12 @@
                 if (!re.test(name)) {
                     ValidataName = false;
                     console.log("名前に使用できない文字が含まれています")
+                    return ValidataName;
                 }
-                console.log(typeof name)
-                console.log(name)
                 if (name.length >= 20) {
                     ValidataName = false;
                     console.log("名前の文字数オーバー")
+                    return ValidataName;
                 }
                 return ValidataName;
             },
@@ -342,14 +344,17 @@
                 if (year.length > 4) {
                     ValidataBirthday = false;
                     console.log("年：文字数オーバー")
+                    return ValidataBirthday;
                 }
                 if (month.length > 2) {
                     ValidataBirthday = false;
                     console.log("月：文字数オーバー")
+                    return ValidataBirthday;
                 }
                 if (day.length > 2) {
                     ValidataBirthday = false;
                     console.log("日：文字数オーバー")
+                    return ValidataBirthday;
                 }
 
                 return ValidataBirthday;
@@ -362,10 +367,12 @@
                 if (!re.test(pass)) {
                     ValidataPass = false;
                     console.log("パスワードに使用できない文字、もしくは全角が含まれています")
+                    return ValidataPass;
                 }
                 if (pass.length < 6) {
                     ValidataPass = false;
                     console.log("パスワードの文字数が少ないです")
+                    return ValidataPass;
                 } else if (pass.length > 128) {
                     ValidataPass = false;
                     console.log("パスワードの文字数オーバー")
