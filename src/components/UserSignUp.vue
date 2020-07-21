@@ -123,7 +123,7 @@
                         </table>
                     </div>
                 </div>
-                <button @click="checkForm"  class="btn-flat-vertical-border">登録</button>
+                <button v-on:click="checkForm"  class="btn-flat-vertical-border">登録</button>
                 <!--<button v-on:click="checkError" class="btn-flat-vertical-border">登録</button>-->
             </div>
         </section>
@@ -238,10 +238,10 @@
 
                 // メールアドレスの入力フォームのバリデーション
                 if ("" === this.SignupForm.UserAddress) {
-                    this.SignupValidation.SignupAddressResult = "メールアドレスを入力してください"
+                    this. SignupValidation.SignupAddressResult  = "メールアドレスを入力してください"
                     console.log("メールアドレスが入力されていない")
                 } else {
-                    SignMail = true
+                    SignMail = true;
                 }
 
                 // パスワードの入力フォームのバリデーション
@@ -249,7 +249,7 @@
                     this.SignupValidation.SignupPasswordResult = "パスワードを入力してください"
                     console.log("パスワードが入力されていない")
                 } else {
-                    SignPass = true
+                    SignPass = true;
                 }
 
                 // 氏名の入力フォームのバリデーション
@@ -257,7 +257,7 @@
                     this.SignupValidation.SignupNameResult = "氏名を入力してください"
                     console.log("氏名が入力されていない")
                 } else {
-                    SignName = true
+                    SignName = true;
                 }
 
                 // 生年月日の入力フォームのバリデーション
@@ -265,7 +265,7 @@
                     this.SignupValidation.SignupBirthdayResult = "生年月日を入力してください"
                     console.log("生年月日が入力されていない")
                 } else {
-                    SignBirthDay = true
+                    SignBirthDay = true;
                 }
 
                 // 体重の入力フォームのバリデーション
@@ -273,7 +273,7 @@
                     this.SignupValidation.SignupWeightResult = "体重を入力してください"
                     console.log("体重が入力されていない")
                 } else {
-                    SignWeight = true
+                    SignWeight = true;
                 }
 
                 // 身長の入力フォームのバリデーション
@@ -281,7 +281,7 @@
                     this.SignupValidation.SignupHeightResult = "身長を入力してください"
                     console.log("身長が入力されていない")
                 } else {
-                    SignHeight = true
+                    SignHeight = true;
                 }
 
 
@@ -376,6 +376,7 @@
                 } else if (pass.length > 128) {
                     ValidataPass = false;
                     console.log("パスワードの文字数オーバー")
+                    return ValidataPass;
                 }
                 return ValidataPass;
             },
