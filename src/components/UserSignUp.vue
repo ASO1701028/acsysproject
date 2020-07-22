@@ -12,8 +12,9 @@
                     個人情報
                 </div>
 
+                <form>
                 <!--氏名 -->
-                <div>
+                <div class="Category">
                     <label for="Name" >名前</label><br>
                     <input type="text" class="input-form-text" id="Name" v-model="SignupForm.UserName">
                 </div>
@@ -22,33 +23,33 @@
                 </p>
 
                 <!--生年月日 -->
-                <div>
+                <div class="Category1">
                     <div id="BirthDayTitle">
                         生年月日
                     </div>
-                    <p class="error">
-                        {{ SignupValidation.SignupBirthdayResult }}
-                    </p>
 
                     <!--年 -->
                     <div id="BirthDay">
                         <label for="Year">年
                             <input type="text" id="Year" v-model="SignupForm.UserBirthdayYear"></label>
+                        <!--月 -->
+                        <label for="Month">月
+                            <input type="text" id="Month" v-model="SignupForm.UserBirthdayMonth"></label>
+                        <!--日 -->
+                        <label for="Day">日
+                            <input type="text" id="Day" v-model="SignupForm.UserBirthdayDay"></label>
                     </div>
-                    <!--月 -->
-                    <label for="Month">月
-                        <input type="text" id="Month" v-model="SignupForm.UserBirthdayMonth"></label>
-                    <!--日 -->
-                    <label for="Day">日
-                        <input type="text" id="Day" v-model="SignupForm.UserBirthdayDay"></label>
                 </div>
+                <p class="error_birthday">
+                    {{ SignupValidation.SignupBirthdayResult }}
+                </p>
 
                 <!--性別 -->
-                <div>
-                    <label for="Gender" id="GenderTitle">性別</label>
+                <div class="Category_Gender">
+                    <label for="male" id="GenderTitle">性別</label>
                     <div id="GenderInput">
-                        <input type="radio" name="Gender" id="Gender" value="男性" v-model="UserGender">男性
-                        <input type="radio" name="Gender" value="女性" v-model="UserGender">女性
+                        <input type="radio" name="Gender" id="male" value="男性" v-model="UserGender" checked="checked">男性
+                        <input type="radio" name="Gender" id="female" value="女性" v-model="UserGender">女性
                     </div>
                 </div>
 
@@ -58,7 +59,7 @@
                 </div>
 
                 <!--メールアドレス -->
-                <div>
+                <div class="Category">
                     <label for="MailAddress">メールアドレス</label><br>
                     <input type="email" class="input-form-text" id="MailAddress" v-model="SignupForm.UserAddress">
                 </div>
@@ -67,7 +68,7 @@
                 </p>
 
                 <!--パスワード -->
-                <div>
+                <div class="Category">
                     <label for="Password">パスワード</label><br>
                     <input type="password" class="input-form-text" id="Password" v-model="SignupForm.UserPass"><br>
                 </div>
@@ -80,7 +81,7 @@
                 </div>
 
                 <!--身長 -->
-                <div>
+                <div class="Category">
                     <label for="Height">身長</label><br>
                     <input type="text" class="input-form-text" id="Height" v-model="SignupForm.UserHeight">
                 </div>
@@ -89,7 +90,7 @@
                 </p>
 
                 <!--体重 -->
-                <div>
+                <div class="Category">
                     <label for="BodyWeight">体重</label><br>
                     <input type="text" class="input-form-text" id="BodyWeight" v-model="SignupForm.UserWeight">
                 </div>
@@ -98,7 +99,7 @@
                 </p>
 
                 <!--身体活動レベル -->
-                <div id="ActiveLevel">
+                <div id="ActiveLevel" class="Category">
                     <label>身体活動レベル</label>
                     <select name=”ActiveLevel” v-model="UserActiveLevel">
                         <option value=”one”>レベルⅠ</option>
@@ -125,6 +126,7 @@
                 </div>
                 <button v-on:click="checkForm"  class="btn-flat-vertical-border">登録</button>
                 <!--<button v-on:click="checkError" class="btn-flat-vertical-border">登録</button>-->
+                </form>
             </div>
         </section>
     </div>
@@ -303,7 +305,7 @@
             SignupValidEmail: function (email) {
                 let Validataemail = true;
                 let re = /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/;
-                if (!re.test(email)) {
+                if (re.test(email)) {
                     Validataemail = false;
                     console.log("メールアドレスに使用できない文字が含まれています")
                     return Validataemail;
@@ -452,12 +454,12 @@
                 e.preventDefault();
             }
             //----------------------------------------------------------------------------
-        }
+        },
+
     }
 </script>
 
 <style scoped>
-
     /*ボタン、テキスト、divの設定*/
     button,input,div{
         /*フォント設定*/
@@ -599,6 +601,37 @@
     .btn-flat-vertical-border:hover {
         background: #283d28;
         color: #FFF;
+    }
+
+    .Category{
+        position: relative;
+    }
+
+    .Category1{
+        position: relative;
+        top: 40px;
+    }
+
+    .Category_Gender{
+        position: relative;
+        top: 60px;
+        margin-bottom: 80px;
+    }
+    .error{
+        position: relative;
+        top: 50px;
+        right: 417px;
+        color: red;
+        font-size: 20px;
+        white-space: nowrap;
+    }
+    .error_birthday{
+        position: relative;
+        top: 110px;
+        right: 420px;
+        color: red;
+        font-size: 20px;
+        white-space: nowrap;
     }
 
 </style>
