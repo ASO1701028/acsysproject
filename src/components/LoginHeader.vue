@@ -66,7 +66,8 @@
                 this.modal = false
             },
             logout(){
-                this.$emit('deleteToken')
+                this.$store.commit("tokenDelete")
+                this.$router.replace("/")
             },
         }
     }
