@@ -33,8 +33,6 @@
 
 <script>
 
-    import crypto from 'crypto-js'
-
     export default {
 
         data(){
@@ -54,7 +52,17 @@
 
             getLogin:function (mail,pass) {
                 window.alert("mailaddress:" + mail + "\n" + "password:" + pass)
-                let newToken = crypto.randomBytes(64)
+                // 生成する文字列の長さ
+                const l = 32;
+
+                // 生成する文字列に含める文字セット
+                const c = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+                const cl = c.length;
+                let newToken = "";
+                for(let i=0; i<l; i++){
+                    newToken += c[Math.floor(Math.random()*cl)];
+                }
                 //ここでAPIに送信
                 this.$store.commit('tokenUpdate',newToken)
                 return 1
