@@ -33,7 +33,6 @@
 
 <script>
 
-
     export default {
 
         data(){
@@ -41,7 +40,6 @@
                 loginForm:{
                     LoginMailAddress : "",
                     LoginPassword:"",
-                    LoginToken:"",
                 },
                 ErrorMessage:true,
                 loginValidation:{
@@ -54,8 +52,19 @@
 
             getLogin:function (mail,pass) {
                 window.alert("mailaddress:" + mail + "\n" + "password:" + pass)
+                // 生成する文字列の長さ
+                const l = 32;
+
+                // 生成する文字列に含める文字セット
+                const c = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+                const cl = c.length;
+                let newToken = "";
+                for(let i=0; i<l; i++){
+                    newToken += c[Math.floor(Math.random()*cl)];
+                }
                 //ここでAPIに送信
-                this.loginForm.LoginToken = "こんばんわ"
+                this.$store.commit('tokenUpdate',newToken)
                 return 1
             },
 
@@ -65,7 +74,8 @@
                     const check = this.getLogin(this.loginForm.LoginMailAddress, this.loginForm.LoginPassword);
                     if (check === 1){
                         //ユーザーが存在時
-                        this.$emit('PushToken', this.loginForm.LoginToken)
+                        console.log("ログイントークン" + this.$store.state.accountToken)
+                        this.$router.replace("/Save_Calorie")
                     }else {
                         //エラーや存在しなかった場合
                         console.log("アカウントが存在しないもしくわエラー")
@@ -135,6 +145,12 @@
                 }
                 return ValidatePassword;
             },
+        },
+        created: function () {
+            //すでにトークンがある場合
+            if (this.$store.state.accountToken) {
+                this.$router.replace("/Save_Calorie")
+            }
         },
     }</script>
 

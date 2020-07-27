@@ -9,9 +9,12 @@ import UserGuide from "../components/UserGuide";
 import Save_Calorie from '../components/Save_Calorie';
 // import Training from "../components/Training";
 
+// store
+import Store from '../store/index'
+
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
 
     routes: [
         {
@@ -62,3 +65,14 @@ export default new Router({
         // }
     ]
 })
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(page => page.meta.isPublic) || Store.state.accountToken) {
+        next()
+    } else {
+        next('/login')
+    }
+})
+
+export default router

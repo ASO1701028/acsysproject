@@ -40,31 +40,18 @@
 <!--        </div>-->
 <!--    </div>-->
     <div>
-        <p>テスト！{{this.token}}</p>
-        <p>テスト！{{this.token}}</p>
-        <p>テスト！{{this.token}}</p>
-        <p>テスト！{{this.token}}</p>
-        <p>テスト！{{this.token}}</p>
+        <p>テスト！</p>
+        <p>テスト！</p>
+        <p>テスト！</p>
+        <p>テスト！</p>
+        <p>テスト！</p>
     </div>
 </template>
 
 <script>
-    import Cookies from "js-cookie";
 
     export default {
         name: "save_calorie",
-        data(){
-          return{
-              token:null,
-          }
-        },
-        created() {
-            this.token = Cookies.get('token')
-
-            if (!this.token){
-                this.$router.replace("/")
-            }
-        }
         // data:function () {
         //     let selectedfood = '';
         //     let foods = [
