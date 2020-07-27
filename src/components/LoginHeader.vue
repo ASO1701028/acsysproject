@@ -18,7 +18,7 @@
                     <b-nav-item-dropdown right>
                         <!-- Using 'button-content' slot -->
                         <template v-slot:button-content>
-                            <em>ユーザー</em>
+                            <em>{{userName}}</em>
 <!--                            Apiで名前の取得-->
                         </template>
                         <b-dropdown-item href="#">登録情報の変更</b-dropdown-item>
@@ -56,6 +56,7 @@
         data() {
             return {
                 modal: false,
+                userName : this.$store.state.accountName,
             }
         },
         methods:{
@@ -69,7 +70,7 @@
                 this.$store.commit("tokenDelete")
                 this.$router.replace("/")
             },
-        }
+        },
     }
 </script>
 
