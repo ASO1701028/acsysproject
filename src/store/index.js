@@ -24,15 +24,15 @@ export default new Vuex.Store({
         tokenDelete(state){
             state.accountToken = ""
         },
-        accountDelete(state,data){
+        accountUpdate(state,data){
             state.accountName = data.name
-                state.accountBirthDay = data.birthday
-                state.accountGender = data.gender
-                state.accountHeight = data.height
-                state.accountWeight = data.weight
-                state.accountActiveLevel = data.activlevel
+            state.accountBirthDay = data.birthday
+            state.accountGender = data.gender
+            state.accountHeight = data.height
+            state.accountWeight = data.weight
+            state.accountActiveLevel = data.activlevel
         },
-        accountUpdate(state){
+        accountDelete(state){
             state.accountName = "ユーザー"
             state.accountBirthDay = ""
             state.accountGender = ""
