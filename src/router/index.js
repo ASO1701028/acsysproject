@@ -6,7 +6,7 @@ import StartTop from "../components/SrartTop";
 import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
 import UserGuide from "../components/UserGuide";
-import Save_Calorie from '../components/Save_Calorie';
+import SaveCalorie from '../components/SaveCalorie';
 // import Training from "../components/Training";
 
 // store
@@ -50,8 +50,8 @@ const router = new Router({
             }
         },
         {
-            path: '/Save_Calorie',
-            component: Save_Calorie,
+            path: '/savecalorie',
+            component: SaveCalorie,
         },
         {
             path: "/calendar",
