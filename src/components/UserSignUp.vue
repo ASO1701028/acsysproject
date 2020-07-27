@@ -133,7 +133,6 @@
 </template>
 
 <script>
-
     const auth = {
         signup: function (mail, pass) {
             window.alert("mailaddress:" + mail + "\n" + "password:" + pass)
@@ -156,6 +155,7 @@
         }
         //-------------------------------------------------------
     }
+    const URL = 'https://krmi8i6z3a.execute-api.us-east-1.amazonaws.com/acsysdeploy/dynamodbctrl'
     export default {
         data(){
             return{
@@ -195,8 +195,10 @@
                 SignupHeightResult: "",
                 SignupWeightResult: "",
             },
+                
           }
         },
+
         methods: {
             data: function () {
                 if (this)
@@ -204,6 +206,37 @@
                         + "\n性別:" + this.UserGender + "\nメールアドレス:" + this.UserAddress + "\nパスワード：" + this.UserPass + "\n身長:" + this.UserHeight
                         + "\n体重" + this.UserWeight + "\n身体活動レベル" + this.UserActiveLevel)
             },
+            Data_post:function(array){
+                this.post_data = {
+                    account_ID: array.account_ID,
+                    account_Name: array.account_Name,
+                    account_height: array.account_height,
+                    account_weight: array.account_weight,
+                    account_birthday: array.account_birthday,
+                    account_gender: array.account_gender,
+                    account_level: array.account_level,
+                    account_address: array.account_address,
+                    account_pass: array.account_pass,
+                }
+                console.log(this.post_data)
+                const json_data = JSON.stringify(this.post_data)
+                fetch(URL,{
+                    mode:'cors',
+                    method:'POST',
+                    body:json_data,
+                    headers:{'Content-type':'application'},
+                })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (data) {
+                        console.log(data)
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+            },
+            //-------------------------------------------------------
             signup: function () {
                 //バリデーション
                 if (this.SignupValidEmail(this.SignupForm.UserAddress) && this.SignupValidName(this.SignupForm.UserName)
