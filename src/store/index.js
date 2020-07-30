@@ -8,7 +8,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state: {
-        accountToken: ''
+        accountToken:'',
+        accountName:'ユーザー',
+        accountBirthDay:'',
+        accountGender:'',
+        accountHeight:'',
+        accountWeight:'',
+        accountActiveLevel:'',
     },
 
     mutations:{
@@ -17,6 +23,22 @@ export default new Vuex.Store({
         },
         tokenDelete(state){
             state.accountToken = ""
+        },
+        accountUpdate(state,data){
+            state.accountName = data.name
+            state.accountBirthDay = data.birthday
+            state.accountGender = data.gender
+            state.accountHeight = data.height
+            state.accountWeight = data.weight
+            state.accountActiveLevel = data.activlevel
+        },
+        accountDelete(state){
+            state.accountName = "ユーザー"
+            state.accountBirthDay = ""
+            state.accountGender = ""
+            state.accountHeight = ""
+            state.accountWeight = ""
+            state.accountActiveLevel = ""
         },
     },
 

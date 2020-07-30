@@ -75,7 +75,7 @@
                     if (check === 1){
                         //ユーザーが存在時
                         console.log("ログイントークン" + this.$store.state.accountToken)
-                        this.$router.replace("/Save_Calorie")
+                        this.$router.replace("/savecalorie")
                     }else {
                         //エラーや存在しなかった場合
                         console.log("アカウントが存在しないもしくわエラー")
