@@ -1,7 +1,7 @@
 <template>
     <div >
         <b-navbar toggleable="lg" variant="dark" type="dark">
-            <a class="navbar-brand " href='/#/Save_Calorie'>
+            <a class="navbar-brand " href='/#/savecalorie'>
                 <img src="../../public/favicon.png" width="35" height="35" class="d-inline-block align-top" alt="penguin">
                 acsys</a>
 
