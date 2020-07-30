@@ -7,6 +7,7 @@ import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
 import UserGuide from "../components/UserGuide";
 import Save_Calorie from '../components/Save_Calorie';
+import test from '../components/test';
 // import Training from "../components/Training";
 
 // store
@@ -40,6 +41,10 @@ const router = new Router({
             meta: {
                 isPublic: true
             }
+        },
+        {
+            path: '/test',
+            component: test,
         },
         {
             path: '/userguide',
