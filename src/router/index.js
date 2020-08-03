@@ -7,6 +7,8 @@ import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
 import UserGuide from "../components/UserGuide";
 import SaveCalorie from '../components/SaveCalorie';
+import ConsumptionCalorieRegistration from "../components/ConsumptionCalorieRegistration";
+import IntakeCalorieRegistration from "../components/IntakeCalorieRegistration";
 // import Training from "../components/Training";
 
 // store
@@ -52,6 +54,14 @@ const router = new Router({
         {
             path: '/savecalorie',
             component: SaveCalorie,
+        },
+        {
+            path: '/consumptioncalorie',
+            component: ConsumptionCalorieRegistration,
+        },
+        {
+            path: '/intakecalorie',
+            component: IntakeCalorieRegistration
         },
         {
             path: "/calendar",
