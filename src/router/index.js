@@ -6,7 +6,7 @@ import StartTop from "../components/SrartTop";
 import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
 import UserGuide from "../components/UserGuide";
-import Save_Calorie from '../components/Save_Calorie';
+//import Save_Calorie from '../components/Save_Calorie';
 import test from '../components/test';
 // import Training from "../components/Training";
 
@@ -54,10 +54,10 @@ const router = new Router({
                 isPublic: true
             }
         },
-        {
-            path: '/Save_Calorie',
-            component: Save_Calorie,
-        },
+   //     {
+  //          path: '/Save_Calorie',
+  //          component: Save_Calorie,
+  //      },
         {
             path: "/calendar",
             name: "calendar",
