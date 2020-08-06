@@ -137,10 +137,12 @@
                 let re = /^(?=.*?[a-z])(?=.*?[A-Z])[a-zA-Z\d]{6,128}$/;
                 if (!re.test(pass)){
                     ValidatePassword = false;
+                    this.loginValidation.loginPassResult="メールアドレスの文字数オーバー"
                     console.log("パスワードに使用できない文字が含まれています")
                 }
                 if (pass.length >= 128 || pass.length <= 5){
                     ValidatePassword = false;
+                    this.loginValidation.loginPassResult="メールアドレスの文字数オーバー"
                     console.log("パスワードの文字数が足りないもしくわ多い")
                 }
                 return ValidatePassword;

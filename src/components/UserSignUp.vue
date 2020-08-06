@@ -28,7 +28,7 @@
                         <input type="text" id="Day" v-model="form.account_day">日</label>
                 </div>
             </div>
-            <p class="error_birthday">
+            <p class="error">
                 {{ SignupValidation.SignupBirthdayResult }}
             </p>
 
@@ -139,7 +139,7 @@
                     account_year: '',
                     account_month: '',
                     account_day: '',
-                    //account_birthday: '',
+                    account_birthday: '',
                     account_gender: '男性',
                     account_level: '',
                     account_address: '',
@@ -148,6 +148,7 @@
                 post_data:post_data,
                 input_data:[],
                 output_data:[],
+                //errors[],
                 ErrorMessage:true,
 
                 SignupValidation: {
@@ -163,7 +164,7 @@
         methods:{
             checkHandler: function(array,event){
                 this.checkForm(event);
-                this.Data_post(array);
+                //this.Data_post(array);
             },
             //----------------------------データ保存---------------------------------------
             Data_post:function(array){
@@ -171,7 +172,7 @@
                     account_name: array.account_name,
                     account_height: Number(array.account_height),
                     account_weight: Number(array.account_weight),
-                    account_birthday: Number(array.account_year+''+array.account_month+''+array.account_day),
+                    account_birthday: Number(array.account_year+''+ ('00' + array.account_month).slice(-2) +''+('00' + array.account_day).slice(-2)),
                     account_gender: array.account_gender,
                     account_level: Number(array.account_level),
                     account_address: array.account_address,
@@ -187,6 +188,8 @@
                 })
                     .then(function (response) {
                         return response.json()
+
+
                     })
                     .then(function (data) {
                         console.log(data)
@@ -203,12 +206,12 @@
                 //バリデーション
                 if (this.SignupValidEmail(this.form.account_address) && this.SignupValidName(this.form.account_name)
                     && this.SignupValidBirthday(this.form.account_birthday) && this.SignupValidPass(this.form.account_level)
-                    && this.SignupValidWeight(this.form.account_weight) && this.SignupValidHeight(this.form.account_height)) {
+                    && this.SignupValidWeight(this.form.account_weight) && this.SignupValidHeight(this.form.account_height)
+                    && this.SignupValidPass(this.form.account_pass)) {
 
                     // eslint-disable-next-line no-undef
                     if (check === 1) {
                         this.Data_post();
-                        this.$router.replace("/Save_Calorie")
                     } else {
                         //エラーや存在しなかった場合
                         console.log("エラー")
@@ -222,69 +225,64 @@
             },
 
             checkForm: function (event) {
-                let SignMail = false;
-                let SignPass = false;
-                let SignName = false;
-                let SignBirthDay = false;
-                let SignWeight = false;
-                let SignHeight = false;
-                //let Sign = false;
+                    let SignMail = false;
+                    let SignPass = false;
+                    let SignName = false;
+                    let SignBirthDay = false;
+                    let SignWeight = false;
+                    let SignHeight = false;
+                    //let Sign = false;
 
-                // メールアドレスの入力フォームのバリデーション
-                if ("" === this.form.account_address || undefined === this.form.account_address) {
-                    this. SignupValidation.SignupAddressResult  = "メールアドレスを入力してください"
-                    console.log("メールアドレスが入力されていない")
-                } else {
-                    SignMail = true;
-                }
+                    // メールアドレスの入力フォームのバリデーション
+                    if ("" === this.form.account_address) {
+                        this.SignupValidation.SignupAddressResult = "メールアドレスを入力してください"
+                        console.log("メールアドレスが入力されていない")
+                    } else {
+                        SignMail = true
+                    }
 
-                // パスワードの入力フォームのバリデーション
-                if ("" === this.form.account_pass || undefined === this.form.account_pass) {
-                    this.SignupValidation.SignupPasswordResult = "パスワードを入力してください"
-                    console.log("パスワードが入力されていない")
-                } else {
-                    SignPass = true;
-                }
+                    // パスワードの入力フォームのバリデーション
+                    if ("" === this.form.account_pass) {
+                        this.SignupValidation.SignupPasswordResult = "パスワードを入力してください"
+                        console.log("パスワードが入力されていない")
+                    } else {
+                        SignPass = true
+                    }
 
-                // 氏名の入力フォームのバリデーション
-                if ("" === this.form.account_name || undefined === this.form.account_name) {
-                    this.SignupValidation.SignupNameResult = "氏名を入力してください"
-                    console.log("氏名が入力されていない")
-                } else {
-                    SignName = true;
-                }
+                    // 氏名の入力フォームのバリデーション
+                    if ("" === this.form.account_name) {
+                        this.SignupValidation.SignupNameResult = "氏名を入力してください"
+                        console.log("氏名が入力されていない")
+                    } else {
+                        SignName = true
+                    }
 
-                // 生年月日の入力フォームのバリデーション
-                if ("" === this.form.account_year || undefined === this.form.account_year ||
-                    "" === this.form.account_month || undefined === this.form.account_month ||
-                    "" === this.form.account_day || undefined === this.form.account_day) {
-                    this.SignupValidation.SignupBirthdayResult = "生年月日を入力してください"
-                    console.log("生年月日が入力されていない")
-                    console.log(this.form.account_year)
-                    console.log(this.form.account_month)
-                    console.log(this.form.account_day)
-                } else {
-                    SignBirthDay = true;
-                }
+                    // 生年月日の入力フォームのバリデーション
+                    if ("" === this.form.account_birthday) {
+                        this.SignupValidation.SignupBirthdayResult = "生年月日を入力してください"
+                        console.log("生年月日が入力されていない")
+                    } else {
+                        SignBirthDay = true
+                    }
 
-                // 体重の入力フォームのバリデーション
-                if ("" === this.form.account_weight || undefined === this.form.account_weight) {
-                    this.SignupValidation.SignupWeightResult = "体重を入力してください"
-                    console.log("体重が入力されていない")
-                } else {
-                    SignWeight = true;
-                }
+                    // 体重の入力フォームのバリデーション
+                    if ("" === this.form.account_weight) {
+                        this.SignupValidation.SignupWeightResult = "体重を入力してください"
+                        console.log("体重が入力されていない")
+                    } else {
+                        SignWeight = true
+                    }
 
-                // 身長の入力フォームのバリデーション
-                if ("" === this.form.account_height || undefined === this.form.account_height) {
-                    this.SignupValidation.SignupHeightResult = "身長を入力してください"
-                    console.log("身長が入力されていない")
-                } else {
-                    SignHeight = true;
-                }
+                    // 身長の入力フォームのバリデーション
+                    if ("" === this.form.account_height) {
+                        this.SignupValidation.SignupHeightResult = "身長を入力してください"
+                        console.log("身長が入力されていない")
+                    } else {
+                        SignHeight = true
+                    }
 
 
-                //バリデーションをクリアした時にsign-up
+                    //バリデーションをクリアした時にsign-up
                 if (SignMail === true && SignPass === true && SignName === true
                     && SignBirthDay === true && SignWeight === true && SignHeight === true) {
                     this.SignupValidation.SignupAddressResult = ""
@@ -304,12 +302,15 @@
                 let re = /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/;
                 if (!re.test(email) && email!==undefined) {
                     Validataemail = false;
+                    this.SignupValidation.SignupAddressResult = "メールアドレスに使用できない文字が含まれています"
                     console.log("メールアドレスに使用できない文字が含まれています")
                     return Validataemail;
                 }
                 if (email.length >= 20) {
                     Validataemail = false;
+
                     console.log("メールアドレスの文字数オーバー")
+                    this.SignupValidation.SignupAddressResult = "メールアドレスの文字数オーバー"
                     return Validataemail;
                 }
                 return Validataemail;
@@ -322,12 +323,14 @@
                 if (!re.test(name)) {
                    ValidataName = false;
                    console.log("名前に使用できない文字が含まれています")
+                    this.SignupValidation.SignupNameResult = "名前に使用できない文字が含まれています"
                    console.log(name)
                    return ValidataName;
                 }
                 if (name.length >= 20) {
                     ValidataName = false;
                     console.log("名前の文字数オーバー")
+                    this.SignupValidation.SignupNameResult = "名前の文字数オーバー"
                     return ValidataName;
                 }
                 return ValidataName;
@@ -339,20 +342,25 @@
                 if (!re.test(year, month, day)) {
                     ValidataBirthday = false;
                     console.log("数値以外の値が含まれています")
+                    this.SignupValidation.SignupBirthdayResult = "数値以外の値が含まれています"
+                    return ValidataBirthday;
                 }
                 if (year.length > 4) {
                     ValidataBirthday = false;
                     console.log("年：文字数オーバー")
+                    this.SignupValidation.SignupBirthdayResult = "年：文字数オーバー"
                     return ValidataBirthday;
                 }
                 if (month.length > 2) {
                     ValidataBirthday = false;
                     console.log("月：文字数オーバー")
+                    this.SignupValidation.SignupBirthdayResult = "月：文字数オーバー"
                     return ValidataBirthday;
                 }
                 if (day.length > 2) {
                     ValidataBirthday = false;
                     console.log("日：文字数オーバー")
+                    this.SignupValidation.SignupBirthdayResult = "日：文字数オーバー"
                     return ValidataBirthday;
                 }
 
@@ -434,5 +442,8 @@
         position: relative;
         top: 100px;
         left: 60px;
+    }
+    .error{
+        color: red;
     }
 </style>
