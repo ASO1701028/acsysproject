@@ -4,14 +4,14 @@
         <table>
             <thead>
             <tr>
-                <th class="training">トレーニング</th>
+                <th class="training">食品</th>
                 <th class="calorie">カロリー</th>
                 <th class="delete">-</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="item in addItem" v-bind:key="item.id">
-                <td>{{ item.training }}</td>
+                <td>{{ item.food }}</td>
                 <td>{{ item.calorie }}</td>
                 <td class="deleteButton">
                     <!-- 削除ボタンのモック -->
@@ -28,7 +28,7 @@
             <inputMyModal @close="closeInputModal" v-if="inputModal">
                 <!-- default スロットコンテンツ -->
                 <div class="h3">食べ物とカロリーを入力してください</div>
-                <input type="text" placeholder="トレーニング" v-model="inputTraining">
+                <input type="text" placeholder="食べ物" v-model="inputFood">
                 <input type="number" placeholder="カロリー" v-model="inputCalorie">
                 <!-- /default -->
                 <!-- footer スロットコンテンツ -->
@@ -53,7 +53,7 @@
             return{
                 inputModal:false,
                 selectModal:false,
-                inputTraining:"",
+                inputFood:"",
                 inputCalorie:"",
                 addItem:[
                 ]
@@ -72,10 +72,10 @@
             },
             addInputData(){
                 this.addItem.push({
-                    training: this.inputTraining,
+                    food: this.inputFood,
                     calorie: this.inputCalorie,
                 })
-                this.inputTraining = ""
+                this.inputFood = ""
                 this.inputCalorie = ""
                 this.inputModal = false
             }
