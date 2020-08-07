@@ -68,7 +68,6 @@
             this.dataGet={
                 account_token:this.userToken
             }
-            console.log(this.userToken)
             const json_data = JSON.stringify(this.dataGet)
             fetch(URL,{
                 mode:'cors',
@@ -78,7 +77,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     const flg_data = data['isSuccess']
                     if(flg_data){
                         console.log('ユーザー情報取得:ok')
