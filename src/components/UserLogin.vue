@@ -122,10 +122,12 @@
                 let re = /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/;
                 if (!re.test(email)){
                     ValidateEmail = false;
+                    this.loginValidation.loginPassResult="メールアドレスに使用できない文字が含まれています"
                     console.log("メールアドレスに使用できない文字が含まれています")
                 }
                 if (email.length >= 200){
                     ValidateEmail = false;
+                    this.loginValidation.loginPassResult="メールアドレスの文字数オーバー"
                     console.log("メールアドレスの文字数オーバー")
                 }
                 return ValidateEmail;
