@@ -57,7 +57,7 @@
                 // 生成する文字列の長さ
                 const l = 32;
                 // 生成する文字列に含める文字セット
-                const c = "abcdefghijklmnopqrstuvwxyz0123456789";
+                const c = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 const cl = c.length;
                 let newToken = "";
                 for(let i=0; i<l; i++){
