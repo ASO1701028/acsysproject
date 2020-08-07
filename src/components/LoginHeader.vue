@@ -57,7 +57,43 @@
             return {
                 modal: false,
                 userName : this.$store.state.accountName,
+                //通信に関数
+                dataGet:[],
+                userToken:this.$store.state.accountToken,
+                userInfBox:[],
             }
+        },
+        created() {
+            const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/information"
+            this.dataGet={
+                account_token:this.userToken
+            }
+            const json_data = JSON.stringify(this.dataGet)
+            fetch(URL,{
+                mode:'cors',
+                method:'POST',
+                body:json_data,
+                headers:{'Content-type':'application'},
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(data)
+                    const flg_data = data['isSuccess']
+                    if(flg_data){
+                        console.log('ユーザー情報取得:ok')
+                        this.userInfBox={
+                            name:data['account_name'],
+                            birthday:data['account_birthday'],
+                            gender:data['account_gender'],
+                            height:data['account_height'],
+                            weight:data['account_weight'],
+                            activlevel:data['account_level'],
+                        }
+                        this.$store.commit('accountUpdate',this.userInfBox)
+                    }else {
+                        console.log('ユーザー情報取得:ng')
+                    }
+                })
         },
         methods:{
             openModal(){

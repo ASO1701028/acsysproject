@@ -7,8 +7,8 @@
         <div class="chart-small">
             <SaveCalorieChart :chart-data="dataCollection" :options="dataOptions"></SaveCalorieChart>
         </div>
-        <a class="btn btn-info btn-lg" href="/#/userguide" role="button">摂取カロリー登録</a>
-        <a class="btn btn-danger btn-lg" href="/#/userguide" role="button">消費カロリー登録</a>
+        <a class="btn btn-info btn-lg" href="/#/intakecalorie" role="button">摂取カロリー登録</a>
+        <a class="btn btn-danger btn-lg" href="/#/consumptioncalorie" role="button">消費カロリー登録</a>
     </div>
 </template>
 
@@ -23,12 +23,16 @@
         },
         data(){
             return{
+                //カロリー関係
                 totalCalorie:120,
                 todayPlusCalorie:200,
                 todayMinusCalorie:150,
                 todayCalorie:0,
+                //グラフの関数
                 dataCollection: null,
                 dataOptions:null,
+                //通信に関数
+                dataGet:[],
             }
         },
         created() {
@@ -104,7 +108,7 @@
                     },
                 }
             },
-        }
+        },
     }
 </script>
 

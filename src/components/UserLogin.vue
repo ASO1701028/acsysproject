@@ -46,36 +46,65 @@
                     loginMailResult: "",
                     loginPassResult:"",
                 },
+                loginArray:[],
+                loginResult:false,
             }
         },
         methods:{
 
-            getLogin:function (mail,pass) {
-                window.alert("mailaddress:" + mail + "\n" + "password:" + pass)
+            getLogin:async function (mail,pass) {
+
                 // 生成する文字列の長さ
                 const l = 32;
-
                 // 生成する文字列に含める文字セット
-                const c = "abcdefghijklmnopqrstuvwxyz0123456789";
-
+                const c = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 const cl = c.length;
                 let newToken = "";
                 for(let i=0; i<l; i++){
                     newToken += c[Math.floor(Math.random()*cl)];
                 }
-                //ここでAPIに送信
-                this.$store.commit('tokenUpdate',newToken)
-                return 1
+
+                // ここでAPIに送信
+                const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/login"
+                this.loginArray={
+                    account_address:mail,
+                    account_pass:pass,
+                    account_token:newToken,
+                }
+                const json_data = JSON.stringify(this.loginArray)
+                await fetch(URL,{
+                    mode:'cors',
+                    method:'POST',
+                    body:json_data,
+                    headers:{'Content-type':'application'},
+                })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(data => {
+                        const flg_data = data['isSuccess']
+                        if(flg_data){
+                            console.log('ログインok')
+                            this.loginResult = true
+                        }else {
+                            console.log('ログインng')
+                        }
+                    })
+                if (this.loginResult){
+                    return newToken
+                }else{
+                    return 0
+                }
             },
 
-            login:function () {
+            login:async function () {
                 //バリデーション
                 if (this.loginValidEmail(this.loginForm.LoginMailAddress) && this.loginValidPass(this.loginForm.LoginPassword)){
-                    const check = this.getLogin(this.loginForm.LoginMailAddress, this.loginForm.LoginPassword);
-                    if (check === 1){
+                    const check = await this.getLogin(this.loginForm.LoginMailAddress, this.loginForm.LoginPassword);
+                    if (check !== 0){
                         //ユーザーが存在時
-                        console.log("ログイントークン" + this.$store.state.accountToken)
-                        this.$router.replace("/savecalorie")
+                        this.$store.commit('tokenUpdate',check)
+                        await this.$router.replace("/savecalorie")
                     }else {
                         //エラーや存在しなかった場合
                         console.log("アカウントが存在しないもしくわエラー")
@@ -153,7 +182,7 @@
         created: function () {
             //すでにトークンがある場合
             if (this.$store.state.accountToken) {
-                this.$router.replace("/Save_Calorie")
+                this.$router.replace("/savecalorie")
             }
         },
     }</script>
