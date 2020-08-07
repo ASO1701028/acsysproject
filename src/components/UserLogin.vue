@@ -84,10 +84,10 @@
                     .then(data => {
                         const flg_data = data['isSuccess']
                         if(flg_data){
-                            console.log('ok')
+                            console.log('ログインok')
                             this.loginResult = true
                         }else {
-                            console.log('ng')
+                            console.log('ログインng')
                         }
                     })
                 if (this.loginResult){
