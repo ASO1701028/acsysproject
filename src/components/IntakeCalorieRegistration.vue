@@ -4,7 +4,7 @@
         <table>
             <thead>
             <tr>
-                <th class="training">食品</th>
+                <th class="food">食品</th>
                 <th class="calorie">カロリー</th>
                 <th class="delete">-</th>
             </tr>
