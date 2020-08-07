@@ -78,9 +78,10 @@
                     body:json_data,
                     headers:{'Content-type':'application'},
                 })
-                    .then(response => response.json())
+                    .then(function (response) {
+                        return response.json()
+                    })
                     .then(data => {
-                        console.log(data)
                         const flg_data = data['isSuccess']
                         if(flg_data){
                             console.log('ok')
