@@ -34,12 +34,12 @@
             <!-- コンポーネント MyModal -->
             <MyModal @close="closeModal" v-if="modal">
                 <!-- default スロットコンテンツ -->
-                <div class="text-danger h3">ログアウトしますか？</div>
+                <h3><span class="text-danger">ログアウト</span>しますか？</h3>
                 <!-- /default -->
                 <!-- footer スロットコンテンツ -->
                 <template slot="footer">
-                    <button class="btn-flat-cancel" @click="closeModal">キャンセル</button>
-                    <button class="btn-flat-red" @click="logout">ログアウト</button>
+                    <button class="btn btn-outline-dark" @click="closeModal">キャンセル</button>
+                    <button class="btn btn-outline-danger" @click="logout">ログアウト</button>
                 </template>
                 <!-- /footer -->
             </MyModal>
@@ -109,43 +109,3 @@
         },
     }
 </script>
-
-<style scoped>
-    .btn-flat-red {
-        font-size: 15px;
-        position: relative;
-        display: inline-block;
-        font-weight: bold;
-        padding: 0.5em 1em;
-        text-decoration: none;
-        border-left: solid 4px #FF839007;
-        border-right: solid 4px #FF839007;
-        color: #ffffff;
-        background: #90645c;
-        transition: .4s;
-    }
-
-    .btn-flat-red:hover {
-        background: #5f120d;
-        color: #FFF;
-    }
-
-    .btn-flat-cancel {
-        font-size: 15px;
-        position: relative;
-        display: inline-block;
-        font-weight: bold;
-        padding: 0.5em 1em;
-        text-decoration: none;
-        border-left: solid 4px #FF839007;
-        border-right: solid 4px #FF839007;
-        color: #ffffff;
-        background: #6e905c;
-        transition: .4s;
-    }
-
-    .btn-flat-cancel:hover {
-        background: #0d5f21;
-        color: #FFF;
-    }
-</style>
