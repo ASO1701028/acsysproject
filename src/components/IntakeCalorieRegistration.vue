@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>摂取カロリー入力</h1>
+        <h3>摂取カロリー合計：{{sumCalories}}</h3>
         <table>
             <thead>
             <tr>
@@ -28,8 +29,10 @@
             <inputMyModal @close="closeInputModal" v-if="inputModal">
                 <!-- default スロットコンテンツ -->
                 <div class="h3">食べ物とカロリーを入力してください</div>
-                <input type="text" placeholder="食べ物" v-model="inputFood">
-                <input type="number" placeholder="カロリー" v-model="inputCalorie">
+                <label for="food"></label>
+                <input type="text" placeholder="食べ物" v-model="inputFood" id="food">
+                <label for="calorie"></label>
+                <input type="number" placeholder="カロリー" v-model="inputCalorie" id="calorie">
                 <!-- /default -->
                 <!-- footer スロットコンテンツ -->
                 <template slot="footer">
@@ -55,8 +58,7 @@
                 selectModal:false,
                 inputFood:"",
                 inputCalorie:"",
-                addItem:[
-                ]
+                addItem: [],
             }
         },
         methods:{
@@ -78,6 +80,12 @@
                 this.inputFood = ""
                 this.inputCalorie = ""
                 this.inputModal = false
+            }
+        },computed:{
+            sumCalories(){
+                return this.addItem.reduce(function(sum, item) {
+                    return Number(sum) + Number(item.calorie)
+                }, 0)
             }
         }
     }
