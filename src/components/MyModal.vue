@@ -37,7 +37,7 @@
         }
 
         &-content {
-            padding: 20px 30px;
+            padding: 40px 40px;
         }
 
         &-footer {
