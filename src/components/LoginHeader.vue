@@ -56,20 +56,19 @@
         data() {
             return {
                 modal: false,
-                userName : this.$store.state.accountName,
                 //通信に関数
                 dataGet:[],
                 userToken:this.$store.state.accountToken,
                 userInfBox:[],
             }
         },
-        created() {
+        async created() {
             const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/information"
             this.dataGet={
                 account_token:this.userToken
             }
             const json_data = JSON.stringify(this.dataGet)
-            fetch(URL,{
+            await fetch(URL,{
                 mode:'cors',
                 method:'POST',
                 body:json_data,
@@ -90,6 +89,8 @@
                             activlevel:data['account_level'],
                         }
                         this.$store.commit('accountUpdate',this.userInfBox)
+                        this.UserName = data['account_name']
+                        console.log(this.UserName)
                     }else {
                         console.log('ユーザー情報取得:ng')
                     }
@@ -107,5 +108,13 @@
                 this.$router.replace("/")
             },
         },
+        computed:{
+            userName:function () {
+                return this.$store.state.accountName
+            }
+        },
+        watch:{
+
+        }
     }
 </script>
