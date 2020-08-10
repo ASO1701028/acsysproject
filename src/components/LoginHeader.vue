@@ -89,8 +89,6 @@
                             activlevel:data['account_level'],
                         }
                         this.$store.commit('accountUpdate',this.userInfBox)
-                        this.UserName = data['account_name']
-                        console.log(this.UserName)
                     }else {
                         console.log('ユーザー情報取得:ng')
                     }
