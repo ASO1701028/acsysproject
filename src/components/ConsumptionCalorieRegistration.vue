@@ -31,8 +31,10 @@
                 <div class="h3">トレーニングとカロリーを入力してください</div>
                 <label for="training"></label>
                 <input type="text" placeholder="トレーニング" v-model="inputTraining" id="training">
+                {{inputTrainingResult}}
                 <label for="calorie"></label>
                 <input type="number" placeholder="カロリー" v-model="inputCalorie" id="calorie">
+                {{inputCalorieResult}}
                 <!-- /default -->
                 <!-- footer スロットコンテンツ -->
                 <template slot="footer">
@@ -58,6 +60,8 @@
                 selectModal:false,
                 inputTraining:"",
                 inputCalorie:"",
+                inputTrainingResult:"",
+                inputCalorieResult:"",
                 addItem:[
                 ]
             }
@@ -69,18 +73,42 @@
             },
             closeInputModal() {
                 this.inputModal = false
+                this.inputTrainingResult = ""
+                this.inputCalorieResult = ""
             },
             openInputModal(){
                 this.inputModal = true
             },
             addInputData(){
-                this.addItem.push({
-                    training: this.inputTraining,
-                    calorie: this.inputCalorie,
-                })
-                this.inputTraining = ""
-                this.inputCalorie = ""
-                this.inputModal = false
+                let inputTrainingCheck = false
+                let inputCalorieCheck = false
+                if (!this.inputTraining){
+                    this.inputTrainingResult="トレーニングを入力してください"
+                    inputTrainingCheck = false
+                }else {
+                    this.inputTrainingResult=""
+                    inputTrainingCheck = true
+                }
+                if (!this.inputCalorie){
+                    this.inputCalorieResult="カロリーを入力してください"
+                    inputCalorieCheck = false
+                }else if(Number(this.inputCalorie) < 0){
+                    this.inputCalorieResult="プラスで入力してください"
+                    inputCalorieCheck = false
+                }else {
+                    this.inputCalorieResult=""
+                    inputCalorieCheck = true
+                }
+
+                if (inputTrainingCheck === true && inputCalorieCheck ===true) {
+                    this.addItem.push({
+                        training: this.inputTraining,
+                        calorie: this.inputCalorie,
+                    })
+                    this.inputTraining = ""
+                    this.inputCalorie = ""
+                    this.inputModal = false
+                }
             }
         },
         computed:{
