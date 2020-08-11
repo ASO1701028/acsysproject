@@ -15,7 +15,7 @@
                 <td>{{ item.food }}</td>
                 <td>{{ item.calorie }}</td>
                 <td class="deleteButton">
-                    <!-- 削除ボタンのモック -->
+                    <!-- 削除ボタン-->
                     <button v-on:click="removeItem(item)">×</button>
                 </td>
             </tr>
@@ -56,29 +56,37 @@
         components: { inputMyModal },
         data(){
             return{
+                //モーダル
                 inputModal:false,
                 selectModal:false,
+                //入力のデータ
                 inputFood:"",
                 inputCalorie:"",
+                //エラー名入れ
                 inputFoodResult:"",
                 inputCalorieResult:"",
+                //通信用
                 addItem: [],
             }
         },
         methods:{
+            //リストの削除
             removeItem:function (item) {
                 const index = this.addItem.indexOf(item);
                 this.addItem.splice(index, 1)
             },
+            //直接入力のモーダルを閉じる
             closeInputModal() {
                 this.inputModal = false
                 this.inputFoodResult=""
                 this.inputCalorieResult=""
             },
+            ////直接入力のモーダルを開く
             openInputModal(){
                 this.inputModal = true
             },
             addInputData(){
+                //バリデーション
                 let inputFoodCheck = false
                 let inputCalorieCheck = false
                 if (!this.inputFood){
@@ -99,6 +107,7 @@
                     inputCalorieCheck = true
                 }
                 if (inputFoodCheck === true && inputCalorieCheck ===true){
+                    //追加処理
                     this.addItem.push({
                         food: this.inputFood,
                         calorie: this.inputCalorie,
@@ -109,6 +118,7 @@
                 }
             }
         },computed:{
+            //カロリー合計計算
             sumCalories(){
                 return this.addItem.reduce(function(sum, item) {
                     return Number(sum) + Number(item.calorie)
