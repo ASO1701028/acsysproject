@@ -31,8 +31,10 @@
                 <div class="h3">食べ物とカロリーを入力してください</div>
                 <label for="food"></label>
                 <input type="text" placeholder="食べ物" v-model="inputFood" id="food">
+                {{inputFoodResult}}
                 <label for="calorie"></label>
                 <input type="number" placeholder="カロリー" v-model="inputCalorie" id="calorie">
+                {{inputCalorieResult}}
                 <!-- /default -->
                 <!-- footer スロットコンテンツ -->
                 <template slot="footer">
@@ -58,6 +60,8 @@
                 selectModal:false,
                 inputFood:"",
                 inputCalorie:"",
+                inputFoodResult:"",
+                inputCalorieResult:"",
                 addItem: [],
             }
         },
@@ -68,18 +72,41 @@
             },
             closeInputModal() {
                 this.inputModal = false
+                this.inputFoodResult=""
+                this.inputCalorieResult=""
             },
             openInputModal(){
                 this.inputModal = true
             },
             addInputData(){
-                this.addItem.push({
-                    food: this.inputFood,
-                    calorie: this.inputCalorie,
-                })
-                this.inputFood = ""
-                this.inputCalorie = ""
-                this.inputModal = false
+                let inputFoodCheck = false
+                let inputCalorieCheck = false
+                if (!this.inputFood){
+                    this.inputFoodResult="食べ物を入力してください"
+                    inputFoodCheck = false
+                }else {
+                    this.inputFoodResult=""
+                    inputFoodCheck = true
+                }
+                if (!this.inputCalorie){
+                    this.inputCalorieResult="カロリーを入力してください"
+                    inputCalorieCheck = false
+                }else if(Number(this.inputCalorie) < 0){
+                    this.inputCalorieResult="プラスで入力してください"
+                    inputCalorieCheck = false
+                }else {
+                    this.inputCalorieResult=""
+                    inputCalorieCheck = true
+                }
+                if (inputFoodCheck === true && inputCalorieCheck ===true){
+                    this.addItem.push({
+                        food: this.inputFood,
+                        calorie: this.inputCalorie,
+                    })
+                    this.inputFood = ""
+                    this.inputCalorie = ""
+                    this.inputModal = false
+                }
             }
         },computed:{
             sumCalories(){
