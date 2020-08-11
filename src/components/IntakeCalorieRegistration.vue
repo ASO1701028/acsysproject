@@ -81,7 +81,7 @@
                 this.inputFoodResult=""
                 this.inputCalorieResult=""
             },
-            ////直接入力のモーダルを開く
+            //直接入力のモーダルを開く
             openInputModal(){
                 this.inputModal = true
             },
