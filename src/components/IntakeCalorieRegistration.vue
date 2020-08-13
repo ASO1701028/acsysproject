@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>摂取カロリー入力</h1>
-        <h3>摂取カロリー合計：{{sumCalories}}</h3>
+        <h3>摂取カロリー合計：{{sumCalories}}k/cal</h3>
         <table>
             <thead>
             <tr>
@@ -13,7 +13,7 @@
             <tbody>
             <tr v-for="item in addItem" v-bind:key="item.id">
                 <td>{{ item.food }}</td>
-                <td>{{ item.calorie }}</td>
+                <td>{{ item.calorie }}k/cal</td>
                 <td class="deleteButton">
                     <!-- 削除ボタン-->
                     <button v-on:click="removeItem(item)">×</button>
@@ -23,6 +23,7 @@
         </table>
         <button @click="openInputModal">入力して追加する</button>
         <button>選択して追加する</button>
+        <button @click="enterInformation">決定</button>
 
         <div class="example-modal-window">
             <!-- コンポーネント MyModal -->
@@ -65,8 +66,12 @@
                 //エラー名入れ
                 inputFoodResult:"",
                 inputCalorieResult:"",
-                //通信用
+                //リスト用
                 addItem: [],
+                //通信用
+                foodArray:[],
+                foodEnterDate:[],
+                foodEnterCalorie:[],
             }
         },
         methods:{
@@ -116,6 +121,43 @@
                     this.inputCalorie = ""
                     this.inputModal = false
                 }
+            },
+            //データ送信
+            enterInformation(){
+                // const URL = https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/schedule/food
+
+                const date = new Date();
+                //日付の生成
+                let today = date.getFullYear()
+                let getMonth = date.getMonth() + 1
+                let getDay = date.getDate()
+                const index = ["00","01","02","03","04","05","06","07","08","09"]
+                if (getMonth < 10){
+                    getMonth = index[getMonth]
+                    today += getMonth
+                }else {
+                    today += String(getMonth)
+                }
+                if (getDay < 10){
+                    getDay = index[getDay]
+                    today += getDay
+                }else {
+                    today += String(getDay)
+                }
+
+                for (let step in  this.addItem){
+                    this.foodEnterDate.push(this.addItem[step].food)
+                    this.foodEnterCalorie.push(this.addItem[step].calorie)
+                }
+
+                this.foodArray ={
+                    "account_token" : this.$store.state.accountToken,
+                    "add_date" : today,
+                    "food_calorie":this.foodEnterCalorie,
+                    "food_name":this.foodEnterDate,
+                }
+                console.log(this.foodArray)
+
             }
         },computed:{
             //カロリー合計計算
