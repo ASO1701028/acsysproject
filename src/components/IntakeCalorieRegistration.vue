@@ -144,7 +144,7 @@
 
                 const date = new Date();
                 //日付の生成
-                let today = date.getFullYear()
+                let today = String(date.getFullYear())
                 let getMonth = date.getMonth() + 1
                 let getDay = date.getDate()
                 const index = ["00","01","02","03","04","05","06","07","08","09"]
@@ -152,14 +152,15 @@
                     getMonth = index[getMonth]
                     today += getMonth
                 }else {
-                    today += String(getMonth)
+                    today += getMonth
                 }
                 if (getDay < 10){
                     getDay = index[getDay]
                     today += getDay
                 }else {
-                    today += String(getDay)
+                    today += getDay
                 }
+                console.log(today)
 
                 for (let step in  this.addItem){
                     this.foodEnterDate.push(this.addItem[step].food)
