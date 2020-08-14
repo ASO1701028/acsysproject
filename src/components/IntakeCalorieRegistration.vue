@@ -29,18 +29,20 @@
             <!-- コンポーネント MyModal -->
             <inputMyModal @close="closeInputModal" v-if="inputModal">
                 <!-- default スロットコンテンツ -->
-                <div class="h3">食べ物とカロリーを入力してください</div>
-                <label for="food"></label>
-                <input type="text" placeholder="食べ物" v-model="inputFood" id="food">
-                {{inputFoodResult}}
-                <label for="calorie"></label>
-                <input type="number" placeholder="カロリー" v-model="inputCalorie" id="calorie">
-                {{inputCalorieResult}}
+                <div class="h3 pb-0 px-lg-5" >食べ物とカロリーを入力してください</div>
+                <div class="form-group">
+                    <label for="food" ></label>
+                    <input type="text" placeholder="食べ物" v-model="inputFood" id="food" class="form-control">
+                    <span class="text-danger">{{inputFoodResult}}</span>
+                    <label for="calorie"></label>
+                    <input type="number" placeholder="カロリー" v-model="inputCalorie" id="calorie" class="form-control ">
+                    <span class="text-danger">{{inputCalorieResult}}</span>
+                </div>
                 <!-- /default -->
                 <!-- footer スロットコンテンツ -->
                 <template slot="footer">
-                    <button @click="closeInputModal">キャンセル</button>
-                    <button @click="addInputData">追加</button>
+                    <button @click="closeInputModal" class="btn btn-outline-secondary">キャンセル</button>
+                    <button @click="addInputData" class="btn btn-outline-success">追加</button>
                 </template>
                 <!-- /footer -->
             </inputMyModal>
