@@ -1,13 +1,15 @@
 <template>
-    <div>
-        <h1>摂取カロリー入力</h1>
-        <h3>摂取カロリー合計：{{sumCalories}}k/cal</h3>
-        <table>
+    <div class="container">
+        <div class="row">
+            <h1 class="col-auto pt-4 pb-3">摂取カロリー入力</h1>
+        </div>
+        <!--リスト-->
+        <table class="table table-hover table-sm col-auto">
             <thead>
-            <tr>
+            <tr class="table-info">
                 <th class="food">食品</th>
                 <th class="calorie">カロリー</th>
-                <th class="delete">-</th>
+                <th class="delete">削除</th>
             </tr>
             </thead>
             <tbody>
@@ -16,14 +18,20 @@
                 <td>{{ item.calorie }}k/cal</td>
                 <td class="deleteButton">
                     <!-- 削除ボタン-->
-                    <button v-on:click="removeItem(item)">×</button>
+                    <button v-on:click="removeItem(item)" class="btn btn-outline-danger btn-sm">ー</button>
                 </td>
             </tr>
+            <td v-if="!addItem.length">リストは空です</td>
             </tbody>
         </table>
-        <button @click="openInputModal">入力して追加する</button>
-        <button>選択して追加する</button>
-        <button @click="enterInformation">決定</button>
+        <div class="row">
+            <h4 class="col-xs-6 col-auto pt-1 pb-2">摂取カロリー合計：{{sumCalories}}k/cal</h4>
+        </div>
+        <div class="row">
+            <button @click="openInputModal" class="btn btn-outline-info col-lg-2 col-auto">入力して追加する</button>
+            <button class="btn btn-outline-primary col-lg-2 col-auto ml-3">選択して追加する</button>
+            <button @click="enterInformation" class="btn btn-outline-success col-lg-2 col-3 ml-auto">決定</button>
+        </div>
 
         <div class="example-modal-window">
             <!-- コンポーネント MyModal -->
@@ -31,7 +39,7 @@
                 <!-- default スロットコンテンツ -->
                 <div class="h3 pb-0 px-lg-5" >食べ物とカロリーを入力してください</div>
                 <div class="form-group">
-                    <label for="food" ></label>
+                    <label for="food"></label>
                     <input type="text" placeholder="食べ物" v-model="inputFood" id="food" class="form-control">
                     <span class="text-danger">{{inputFoodResult}}</span>
                     <label for="calorie"></label>
@@ -99,7 +107,10 @@
                 if (!this.inputFood){
                     this.inputFoodResult="食べ物を入力してください"
                     inputFoodCheck = false
-                }else {
+                }else if (this.inputFood.length>75){
+                    this.inputFoodResult="文字数が多すぎます"
+                    inputFoodCheck = false
+                }else{
                     this.inputFoodResult=""
                     inputFoodCheck = true
                 }
@@ -108,6 +119,9 @@
                     inputCalorieCheck = false
                 }else if(Number(this.inputCalorie) < 0){
                     this.inputCalorieResult="プラスで入力してください"
+                    inputCalorieCheck = false
+                }else if (this.inputCalorie.length > 7){
+                    this.inputCalorieResult="桁数が多すぎます"
                     inputCalorieCheck = false
                 }else {
                     this.inputCalorieResult=""
@@ -171,7 +185,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

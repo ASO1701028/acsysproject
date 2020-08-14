@@ -1,13 +1,15 @@
 <template>
-    <div>
-        <h1>消費カロリー入力</h1>
-        <h3>消費カロリー合計：{{sumCalories}}k/cal</h3>
-        <table>
+    <div class="container">
+        <div class="row">
+            <h1 class="col-auto pt-4 pb-3">消費カロリー入力</h1>
+        </div>
+        <!--リスト-->
+        <table class="table table-hover table-sm col-auto">
             <thead>
-            <tr>
+            <tr class="table-danger">
                 <th class="training">トレーニング</th>
                 <th class="calorie">カロリー</th>
-                <th class="delete">-</th>
+                <th class="delete">削除</th>
             </tr>
             </thead>
             <tbody>
@@ -15,15 +17,21 @@
                 <td>{{ item.training }}</td>
                 <td>{{ item.calorie }}k/cal</td>
                 <td class="deleteButton">
-                    <!-- 削除ボタン -->
-                    <button v-on:click="removeItem(item)">×</button>
+                    <!-- 削除ボタン-->
+                    <button v-on:click="removeItem(item)" class="btn btn-outline-danger btn-sm">ー</button>
                 </td>
             </tr>
+            <td v-if="!addItem.length">リストは空です</td>
             </tbody>
         </table>
-        <button @click="openInputModal">入力して追加する</button>
-        <button>選択して追加する</button>
-        <button>決定</button>
+        <div class="row">
+            <h4 class="col-xs-6 col-auto pt-1 pb-2">消費カロリー合計：{{sumCalories}}k/cal</h4>
+        </div>
+        <div class="row">
+            <button @click="openInputModal" class="btn btn-outline-info col-lg-2 col-auto">入力して追加する</button>
+            <button class="btn btn-outline-primary col-lg-2 col-auto ml-3">選択して追加する</button>
+            <button class="btn btn-outline-success col-lg-2 col-3 ml-auto">決定</button>
+        </div>
 
         <div class="example-modal-window">
             <!-- コンポーネント MyModal -->
@@ -95,6 +103,9 @@
                 if (!this.inputTraining){
                     this.inputTrainingResult="トレーニングを入力してください"
                     inputTrainingCheck = false
+                }else if (this.inputTraining.length>75){
+                    this.inputTrainingResult="文字数が多すぎます"
+                    inputTrainingCheck = false
                 }else {
                     this.inputTrainingResult=""
                     inputTrainingCheck = true
@@ -104,6 +115,9 @@
                     inputCalorieCheck = false
                 }else if(Number(this.inputCalorie) < 0){
                     this.inputCalorieResult="プラスで入力してください"
+                    inputCalorieCheck = false
+                }else if (this.inputCalorie.length > 7){
+                    this.inputCalorieResult="桁数が多すぎます"
                     inputCalorieCheck = false
                 }else {
                     this.inputCalorieResult=""
