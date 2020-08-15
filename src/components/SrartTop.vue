@@ -13,7 +13,7 @@
 
     .jumbotron-extend {
         position: relative;
-        height: 100vh;
+        height: 91.3vh;
         min-height: 300px;
         background: url(../assets/StartTopImage.jpg) no-repeat center center;
         background-size: cover;
