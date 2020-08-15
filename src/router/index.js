@@ -9,6 +9,7 @@ import UserGuide from "../components/UserGuide";
 import SaveCalorie from '../components/SaveCalorie';
 import ConsumptionCalorieRegistration from "../components/ConsumptionCalorieRegistration";
 import IntakeCalorieRegistration from "../components/IntakeCalorieRegistration";
+import Calender from  "../components/Calendar"
 // import Training from "../components/Training";
 
 // store
@@ -65,8 +66,7 @@ const router = new Router({
         },
         {
             path: "/calendar",
-            name: "calendar",
-            component: () => import("@/components/Calendar")
+            component: Calender
         },
         // {
         //     path: "/training",
