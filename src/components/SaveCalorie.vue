@@ -30,7 +30,7 @@
         data(){
             return{
                 //カロリー関係
-                totalCalorie:120,
+                totalCalorie:-120,
                 todayPlusCalorie:200,
                 todayMinusCalorie:150,
                 todayCalorie:0,
