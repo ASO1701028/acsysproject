@@ -151,10 +151,12 @@
                 let re = /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/;
                 if (!re.test(email)){
                     ValidateEmail = false;
+                    this.loginValidation.loginPassResult="メールアドレスに使用できない文字が含まれています"
                     console.log("メールアドレスに使用できない文字が含まれています")
                 }
                 if (email.length >= 200){
                     ValidateEmail = false;
+                    this.loginValidation.loginPassResult="メールアドレスの文字数オーバー"
                     console.log("メールアドレスの文字数オーバー")
                 }
                 return ValidateEmail;
@@ -166,10 +168,12 @@
                 let re = /^(?=.*?[a-z])(?=.*?[A-Z])[a-zA-Z\d]{6,128}$/;
                 if (!re.test(pass)){
                     ValidatePassword = false;
+                    this.loginValidation.loginPassResult="メールアドレスの文字数オーバー"
                     console.log("パスワードに使用できない文字が含まれています")
                 }
                 if (pass.length >= 128 || pass.length <= 5){
                     ValidatePassword = false;
+                    this.loginValidation.loginPassResult="メールアドレスの文字数オーバー"
                     console.log("パスワードの文字数が足りないもしくわ多い")
                 }
                 return ValidatePassword;
