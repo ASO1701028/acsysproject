@@ -92,6 +92,9 @@
                             console.log('ログインng')
                         }
                     })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
                 if (this.loginResult){
                     return newToken
                 }else{
@@ -111,6 +114,7 @@
                         //エラーや存在しなかった場合
                         console.log("アカウントが存在しないもしくわエラー")
                         this.ErrorMessage = false
+                        alert("エラーが発生しました。もう一度やり直してください")
                     }
                 }else {
                     // バリデーションにはじかれた場合
@@ -119,8 +123,8 @@
             },
 
             checkFrom: function(event){
-                let LoginMail = false;
-                let LoginPass = false;
+                let LoginMail = false
+                let LoginPass = false
 
                 //メールアドレスの入力フォームのバリデーション
                 if (!this.loginForm.LoginMailAddress) {
@@ -151,32 +155,32 @@
 
             //メールアドレスの厳格なバリデーション
             loginValidEmail: function (email) {
-                let ValidateEmail = true;
-                let re = /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/;
+                let ValidateEmail = true
+                let re = /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/
                 if (!re.test(email)){
-                    ValidateEmail = false;
+                    ValidateEmail = false
                     console.log("メールアドレスに使用できない文字が含まれているもしくわ形式が違う")
                 }
                 if (email.length >= 200){
-                    ValidateEmail = false;
+                    ValidateEmail = false
                     console.log("メールアドレスの文字数オーバー")
                 }
-                return ValidateEmail;
+                return ValidateEmail
             },
 
             //パスワードの厳格なバリデーション
             loginValidPass: function (pass) {
-                let ValidatePassword = true;
-                let re = /^(?=.*?[a-z])(?=.*?[A-Z])[a-zA-Z\d]{6,128}$/;
+                let ValidatePassword = true
+                let re = /^[A-Za-z0-9]+$/
                 if (!re.test(pass)){
-                    ValidatePassword = false;
+                    ValidatePassword = false
                     console.log("パスワードに使用できない文字が含まれています")
                 }
                 if (pass.length >= 128 || pass.length <= 5){
                     ValidatePassword = false;
                     console.log("パスワードの文字数が足りないもしくわ多い")
                 }
-                return ValidatePassword;
+                return ValidatePassword
             },
         },
         created: function () {
