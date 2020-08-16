@@ -57,7 +57,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
+                    console.log("ユーザーカロリー取得:ok")
                     this.totalCalorie =data["difference_calorie"]
                     this.todayPlusCalorie = data["today_intaked"]
                     this.todayMinusCalorie  = data["today_burned"]
