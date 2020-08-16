@@ -2,15 +2,18 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // components
-import StartTop from "../components/SrartTop";
+import StartTop from "../components/SrartTop"
 import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
-import UserGuide from "../components/UserGuide";
-import SaveCalorie from '../components/SaveCalorie';
-import ConsumptionCalorieRegistration from "../components/ConsumptionCalorieRegistration";
-import IntakeCalorieRegistration from "../components/IntakeCalorieRegistration";
+import UserGuide from "../components/UserGuide"
+import SaveCalorie from '../components/SaveCalorie'
+import ConsumptionCalorieRegistration from "../components/ConsumptionCalorieRegistration"
+import IntakeCalorieRegistration from "../components/IntakeCalorieRegistration"
 import Calender from  "../components/Calendar"
-// import Training from "../components/Training";
+import Training from "../components/Training"
+import Statistics from "../components/Statistics"
+import Post from "../components/Post"
+import UserChange from "../components/UserChange"
 
 // store
 import Store from '../store/index'
@@ -68,11 +71,26 @@ const router = new Router({
             path: "/calendar",
             component: Calender
         },
-        // {
-        //     path: "/training",
-        //     name: "training",
-        //     component: Training,
-        // }
+        {
+            path: "/training",
+            name: "training",
+            component: Training,
+        },
+        {
+            path: "/statistics",
+            name: "statistics",
+            component: Statistics,
+        },
+        {
+            path: "/post",
+            name: "post",
+            component: Post,
+        },
+        {
+            path: "/userchange",
+            name: "userchange",
+            component: UserChange,
+        }
     ]
 })
 
