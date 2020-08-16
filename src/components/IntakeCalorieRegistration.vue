@@ -15,7 +15,7 @@
             <tbody>
             <tr v-for="item in addItem" v-bind:key="item.id">
                 <td>{{ item.food }}</td>
-                <td>{{ item.calorie }}k/cal</td>
+                <td>{{ item.calorie }}kcal</td>
                 <td class="deleteButton">
                     <!-- 削除ボタン-->
                     <button v-on:click="removeItem(item)" class="btn btn-outline-danger btn-sm">ー</button>
@@ -25,7 +25,7 @@
             </tbody>
         </table>
         <div class="row">
-            <h4 class="col-xs-6 col-auto pt-1 pb-2">摂取カロリー合計：{{sumCalories}}k/cal</h4>
+            <h4 class="col-xs-6 col-auto pt-1 pb-2">摂取カロリー合計：{{sumCalories}}kcal</h4>
         </div>
         <div class="row">
             <button @click="openInputModal" class="btn btn-outline-info col-lg-2 col-auto">入力して追加する</button>
