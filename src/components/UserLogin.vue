@@ -1,10 +1,10 @@
 <template>
     <div id="#app" class="container">
         <section>
-            <div class="text-success mt-5 mb-2 text-center h1 font-weight-bold">
+            <div class="text-success mt-5 mb-4 text-center h1 font-weight-bold">
                 acsys にログイン
             </div>
-            <div v-if="!ErrorMessage" class="mt-3 text-center h3 text-danger">
+            <div v-if="!ErrorMessage" class="text-center h3 text-danger">
                 メールアドレスかパスワードが間違っています
             </div>
             <form>
@@ -23,7 +23,7 @@
                     </p>
                 </div>
                 <div class="col text-center">
-                    <button v-on:click="checkFrom" class="btn btn-success btn-lg mx-auto col-lg-6 col-md-8 mt-3">ログイン</button>
+                    <button v-on:click="checkFrom" class="btn btn-success btn-lg mx-auto col-lg-6 col-md-8 mt-4">ログイン</button>
                 </div>
             </form>
             <div class="text-center mt-3" >
