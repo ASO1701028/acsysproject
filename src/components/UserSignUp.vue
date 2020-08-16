@@ -448,6 +448,11 @@
                 }
                 event.preventDefault();
             },
+        },created() {
+            //すでにトークンがある場合
+            if (this.$store.state.accountToken) {
+                this.$router.replace("/savecalorie")
+            }
         }
     }
 </script>
