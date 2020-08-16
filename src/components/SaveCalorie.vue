@@ -62,6 +62,10 @@
                     this.todayPlusCalorie = data["today_intaked"]
                     this.todayMinusCalorie  = data["today_burned"]
                 })
+                .catch(function (error) {
+                    console.log(error)
+                    alert("エラーが発生しました。もう一度やり直してください")
+                })
 
             this.todayCalorie = this.todayMinusCalorie - this.todayPlusCalorie
 
