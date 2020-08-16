@@ -1,31 +1,33 @@
 <template>
-    <div id="#app">
+    <div id="#app" class="container">
         <section>
-            <div id="login-title">
+            <div class="text-success mt-5 mb-2 text-center h1 font-weight-bold">
                 acsys にログイン
             </div>
-            <div id="error-login" v-if="!ErrorMessage">
+            <div v-if="!ErrorMessage" class="mt-3 text-center h3 text-danger">
                 メールアドレスかパスワードが間違っています
             </div>
             <form>
-                <div>
+                <div class="form-group mx-auto">
                     <label for="Mail"></label>
-                    <input type="email" id="Mail" placeholder="メールアドレス" v-model="loginForm.LoginMailAddress">
+                    <input type="email" id="Mail" placeholder="メールアドレス" v-model="loginForm.LoginMailAddress" class="form-control col-lg-6 col-md-8 mx-auto">
+                    <p class="text-danger text-center h5">
+                        {{ loginValidation.loginMailResult }}
+                    </p>
                 </div>
-                <p class="error">
-                    {{ loginValidation.loginMailResult }}
-                </p>
-                <div>
+                <div class="form-group">
                     <label for="Pass"></label>
-                    <input type="Password" id="Pass" placeholder="パスワード" v-model="loginForm.LoginPassword" >
+                    <input type="Password" id="Pass" placeholder="パスワード" v-model="loginForm.LoginPassword" class="form-control col-lg-6 col-md-8 mt-1 mx-auto">
+                    <p class="text-danger text-center h5">
+                        {{ loginValidation.loginPassResult }}
+                    </p>
                 </div>
-                <p class="error">
-                    {{ loginValidation.loginPassResult }}
-                </p>
-                <button v-on:click="checkFrom" class="btn-flat-vertical-border">ログイン</button>
+                <div class="col text-center">
+                    <button v-on:click="checkFrom" class="btn btn-success btn-lg mx-auto col-lg-6 col-md-8 mt-3">ログイン</button>
+                </div>
             </form>
-            <div id="login-new-account" >
-                <router-link to="/signup" class="cp_link">アカウントの新規作成</router-link>
+            <div class="text-center mt-3" >
+                <router-link to="/signup" class="h5 text-success">アカウントの新規作成</router-link>
             </div>
         </section>
     </div>
@@ -125,6 +127,7 @@
                     this.loginValidation.loginMailResult="メールアドレスを入力してください"
                     console.log("メールアドレスの文字が入力されていない")
                 }else {
+                    this.loginValidation.loginMailResult=""
                     LoginMail = true
                 }
 
@@ -133,6 +136,7 @@
                     this.loginValidation.loginPassResult="パスワードを入力してください"
                     console.log("パスワードの文字が入力されていない")
                 }else {
+                    this.loginValidation.loginPassResult=""
                     LoginPass = true
                 }
 
@@ -151,12 +155,10 @@
                 let re = /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/;
                 if (!re.test(email)){
                     ValidateEmail = false;
-                    this.loginValidation.loginPassResult="メールアドレスに使用できない文字が含まれています"
-                    console.log("メールアドレスに使用できない文字が含まれています")
+                    console.log("メールアドレスに使用できない文字が含まれているもしくわ形式が違う")
                 }
                 if (email.length >= 200){
                     ValidateEmail = false;
-                    this.loginValidation.loginPassResult="メールアドレスの文字数オーバー"
                     console.log("メールアドレスの文字数オーバー")
                 }
                 return ValidateEmail;
@@ -168,12 +170,10 @@
                 let re = /^(?=.*?[a-z])(?=.*?[A-Z])[a-zA-Z\d]{6,128}$/;
                 if (!re.test(pass)){
                     ValidatePassword = false;
-                    this.loginValidation.loginPassResult="メールアドレスの文字数オーバー"
                     console.log("パスワードに使用できない文字が含まれています")
                 }
                 if (pass.length >= 128 || pass.length <= 5){
                     ValidatePassword = false;
-                    this.loginValidation.loginPassResult="メールアドレスの文字数オーバー"
                     console.log("パスワードの文字数が足りないもしくわ多い")
                 }
                 return ValidatePassword;
@@ -186,117 +186,3 @@
             }
         },
     }</script>
-
-<style scoped>
-
-    /*ボタン、テキスト、divの設定*/
-    button,input,div{
-        /*フォント設定*/
-        font-family: "Montserrat","游ゴシック",YuGothic,"ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN","メイリオ",Meiryo,sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-    }
-
-    /*acsysにログインのスタイル*/
-    #login-title{
-        margin-top: 60px;
-        font-size: 40px;
-        color: #5c905c;
-        font-weight: bolder;
-    }
-
-    /*新規作成のリンク*/
-    #login-new-account{
-        font-size: 20px;
-        margin-top: 20px;
-        margin-bottom: 25px;
-    }
-
-    .cp_link {
-        padding: 0.1em 0.3em;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, rgb(92, 144, 92) 50%);
-        background-position: 0 0;
-        background-size: 200% auto;
-        transition: .3s;
-        color: #5c905c;
-        text-decoration: none;
-    }
-    .cp_link:hover {
-        background-position: -100% 0;
-        color: #fff;
-    }
-
-    /*エラー文の表示エリア*/
-    #error-login{
-        font-size: 22px;
-        margin-top: 15px;
-        color: #ff7d6e;
-        background: #ffebe9;
-        border-top: solid 10px #ff7d6e;
-        padding: 0.5em 1em;
-        display: inline-block;
-    }
-
-    /*inputのスタイル*/
-    input {
-        width: 25em;
-        font-size: 20px;
-        margin-top: 30px;
-    }
-
-    /*inputフォーカス時*/
-    input:focus{
-        border: 2px solid #5c905c;
-        z-index: 10;
-        outline: 0;
-    }
-
-    /*buttonの設定*/
-    button {
-        width: 25em;
-        font-size: 20px;
-        margin-top: 30px;
-        padding:5px;
-        line-height: normal;
-        display:inline-block;
-    }
-
-    .btn-flat-vertical-border {
-        position: relative;
-        display: inline-block;
-        font-weight: bold;
-        padding: 0.5em 1em;
-        text-decoration: none;
-        border-left: solid 4px #FF839007;
-        border-right: solid 4px #FF839007;
-        color: #ffffff;
-        background: #5c905c;
-        transition: .4s;
-    }
-
-    .btn-flat-vertical-border:hover {
-        background: #283d28;
-        color: #FFF;
-    }
-
-    .error{
-        color: red;
-        font-size: 20px;
-    }
-
-    @media only screen and (max-device-width : 850px) {
-        /* スマートフォンだけ以下を適用 */
-        input {
-            width: 95%;
-            font-size: 20px;
-            margin-top: 40px;
-        }
-
-        button {
-            width: 95%;
-            font-size: 20px;
-            margin-top: 40px;
-        }
-    }
-</style>
