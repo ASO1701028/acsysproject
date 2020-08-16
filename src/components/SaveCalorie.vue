@@ -42,7 +42,31 @@
                 dataGet:[],
             }
         },
-        created() {
+        async created() {
+
+            // const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/calorie"
+            // this.dataGet={
+            //     account_token:this.$store.state.accountToken
+            // }
+            // console.log(this.dataGet.account_token)
+            // const json_data = JSON.stringify(this.dataGet)
+            // await fetch(URL,{
+            //     mode:'cors',
+            //     method:'POST',
+            //     body:json_data,
+            //     headers:{'Content-type':'application'},
+            // })
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         console.log(data)
+            //         const flg_data = data['isSuccess']
+            //         if(flg_data){
+            //             console.log('ユーザーカロリー取得:ok')
+            //         }else {
+            //             console.log('ユーザーカロリー取得:ng')
+            //         }
+            //     })
+
             this.todayCalorie = this.todayMinusCalorie - this.todayPlusCalorie
             if (this.totalCalorie>0){
                 this.comment = "いい感じに貯金が貯まってきましたね！無理をせずこの調子で頑張っていきましょう。"

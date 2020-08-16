@@ -103,6 +103,30 @@
                 this.modal = false
             },
             logout(){
+                // const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/logout"
+                // this.dataGet={
+                //     account_token:this.userToken
+                // }
+                // const json_data = JSON.stringify(this.dataGet)
+                // fetch(URL,{
+                //     mode:'cors',
+                //     method:'POST',
+                //     body:json_data,
+                //     headers:{'Content-type':'application'},
+                // })
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         // console.log(data)
+                //         const flg_data = data['isSuccess']
+                //         if(flg_data){
+                //             console.log('ログアウト:ok')
+                //             this.$store.commit("tokenDelete")
+                //             this.$router.replace("/")
+                //         }else {
+                //             console.log('ログアウト:ng')
+                //             alert("エラーが発生しました。もう一度やり直してください")
+                //         }
+                //     })
                 this.$store.commit("tokenDelete")
                 this.$router.replace("/")
             },
