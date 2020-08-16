@@ -87,6 +87,7 @@
                             height:data['account_height'],
                             weight:data['account_weight'],
                             activlevel:data['account_level'],
+                            startday:data['regist_date']
                         }
                         this.$store.commit('accountUpdate',this.userInfBox)
                     }else {
