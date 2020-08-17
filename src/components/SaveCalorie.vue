@@ -30,9 +30,9 @@
         data(){
             return{
                 //カロリー関係
-                totalCalorie:-120,
-                todayPlusCalorie:200,
-                todayMinusCalorie:150,
+                totalCalorie:0,
+                todayPlusCalorie:0,
+                todayMinusCalorie:0,
                 todayCalorie:0,
                 comment:"",
                 //グラフの関数
@@ -44,33 +44,36 @@
         },
         async created() {
 
-            // const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/calorie"
-            // this.dataGet={
-            //     account_token:this.$store.state.accountToken
-            // }
-            // console.log(this.dataGet.account_token)
-            // const json_data = JSON.stringify(this.dataGet)
-            // await fetch(URL,{
-            //     mode:'cors',
-            //     method:'POST',
-            //     body:json_data,
-            //     headers:{'Content-type':'application'},
-            // })
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         console.log(data)
-            //         const flg_data = data['isSuccess']
-            //         if(flg_data){
-            //             console.log('ユーザーカロリー取得:ok')
-            //         }else {
-            //             console.log('ユーザーカロリー取得:ng')
-            //         }
-            //     })
+            const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/calorie"
+            this.dataGet={
+                account_token:this.$store.state.accountToken
+            }
+            const json_data = JSON.stringify(this.dataGet)
+            await fetch(URL,{
+                mode:'cors',
+                method:'POST',
+                body:json_data,
+                headers:{'Content-type':'application'},
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("ユーザーカロリー取得:ok")
+                    this.totalCalorie =data["difference_calorie"]
+                    this.todayPlusCalorie = data["today_intaked"]
+                    this.todayMinusCalorie  = data["today_burned"]
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    alert("エラーが発生しました。もう一度やり直してください")
+                })
 
             this.todayCalorie = this.todayMinusCalorie - this.todayPlusCalorie
-            if (this.totalCalorie>0){
+
+            if (this.totalCalorie>50){
                 this.comment = "いい感じに貯金が貯まってきましたね！無理をせずこの調子で頑張っていきましょう。"
-            }else{
+            }else if (this.totalCalorie>=0){
+                this.comment = "今日も一日頑張っていきましょう！"
+            } else{
                 this.comment = "貯金がマイナスになってしまいましたね。こんな時は運動する量を増やしたり、食事を見直してみたりしましょう！"
             }
         },mounted () {
