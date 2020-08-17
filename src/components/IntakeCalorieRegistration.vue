@@ -90,8 +90,6 @@
                 addItem: [],
                 //通信用
                 foodArray:[],
-                foodEnterDate:[],
-                foodEnterCalorie:[],
                 //日付選択
                 mode: 'single',
                 formats: {
@@ -180,7 +178,6 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data)
                         let check = data["isSuccess"]
                         if (check === true){
                             console.log("摂取カロリー登録:ok")
