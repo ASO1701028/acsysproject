@@ -1,12 +1,18 @@
 <template>
     <div class="container">
         <div class="row">
-            <h1 class="col-auto pt-4 pb-3">消費カロリー入力</h1>
+            <h1 class="col-auto pt-4 pb-2">消費カロリー入力</h1>
         </div>
+        <v-date-picker
+                :input-props="{ class: 'formats.input', name: 'event_dates', placeholder:'日付を入力' }"
+                :mode="mode"
+                :formats="formats"
+                v-model="selectedDate"></v-date-picker>
         <!--リスト-->
-        <table class="table table-hover table-sm col-auto">
+        <table class="table table-hover mt-1 table-sm col-auto">
             <thead>
             <tr class="table-danger">
+                <th class="addDate">日付</th>
                 <th class="training">トレーニング</th>
                 <th class="calorie">カロリー</th>
                 <th class="delete">削除</th>
@@ -14,8 +20,9 @@
             </thead>
             <tbody>
             <tr v-for="item in addItem" v-bind:key="item.id">
-                <td>{{ item.training }}</td>
-                <td>{{ item.calorie }}kcal</td>
+                <td>{{ item.add_date }}</td>
+                <td>{{ item.motion_name }}</td>
+                <td>{{ item.motion_calorie }}kcal</td>
                 <td class="deleteButton">
                     <!-- 削除ボタン-->
                     <button v-on:click="removeItem(item)" class="btn btn-outline-danger btn-sm">ー</button>
@@ -30,7 +37,7 @@
         <div class="row">
             <button @click="openInputModal" class="btn btn-outline-info col-lg-2 col-auto">入力して追加する</button>
             <button class="btn btn-outline-primary col-lg-2 col-auto ml-3">選択して追加する</button>
-            <button class="btn btn-outline-success col-lg-2 col-3 ml-auto">決定</button>
+            <button class="btn btn-outline-success col-lg-2 col-3 ml-auto" @click="enterInformation">決定</button>
         </div>
 
         <div class="example-modal-window">
@@ -78,6 +85,13 @@
                 inputCalorieResult:"",
                 //リスト用
                 addItem:[],
+                trainingArray:[],
+                //日付選択
+                mode: 'single',
+                formats: {
+                    input: ['YYYY-MM-DD'],
+                },
+                selectedDate: new Date(),
             }
         },
         methods:{
@@ -123,24 +137,65 @@
                     this.inputCalorieResult=""
                     inputCalorieCheck = true
                 }
-
+                let time = this.selectedDate.getFullYear() + ("0" + (this.selectedDate.getMonth() + 1)).slice(-2) +("0" + this.selectedDate.getDate()).slice(-2)
                 if (inputTrainingCheck === true && inputCalorieCheck ===true) {
                     //追加処理
                     this.addItem.push({
-                        training: this.inputTraining,
-                        calorie: this.inputCalorie,
+                        motion_name: this.inputTraining,
+                        motion_calorie: this.inputCalorie,
+                        add_date:Number(time),
                     })
                     this.inputTraining = ""
                     this.inputCalorie = ""
                     this.inputModal = false
                 }
+            },
+            //データ送信
+            enterInformation:async function(){
+
+                if (this.addItem.length===0){
+                    alert("一つ以上入力してください")
+                    return
+                }
+
+                const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/schedule/motion"
+
+                this.trainingArray ={
+                    'account_token':this.$store.state.accountToken,
+                    'data':this.addItem
+                }
+
+                const json_data = JSON.stringify(this.trainingArray)
+                await fetch(URL,{
+                    mode:'cors',
+                    method:'POST',
+                    body:json_data,
+                    headers:{'Content-type':'application'},
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        let check = data["isSuccess"]
+                        if (check === true){
+                            console.log("消費カロリー登録:ok")
+                            this.$router.replace("/savecalorie")
+                        }else {
+                            alert("エラーが発生しました。もう一度やり直してください")
+                            console.log("消費カロリー登録:ng")
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                        alert("エラーが発生しました。もう一度やり直してください")
+                    })
+
             }
         },
         computed:{
             //カロリー合計計算
             sumCalories(){
                 return this.addItem.reduce(function(sum, item) {
-                    return Number(sum) + Number(item.calorie)
+                    return Number(sum) + Number(item.motion_calorie)
                 }, 0)
             }
         },
