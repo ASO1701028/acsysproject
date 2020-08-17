@@ -364,7 +364,7 @@
 
 
                 // 体重の入力フォームのバリデーション
-                if ("" === this.form.account_weight) {
+                if (!this.form.account_weight) {
                     this.SignupValidation.SignupWeightResult = "体重を入力してください"
                     console.log(this.SignupValidation.SignupWeightResult)
                     this.errors.push(this.SignupValidation.SignupWeightResult)
@@ -393,7 +393,7 @@
                 }
 
                 // 身長の入力フォームのバリデーション
-                if ("" === this.form.account_height) {
+                if (!this.form.account_height) {
                     this.SignupValidation.SignupHeightResult = "身長を入力してください"
                     console.log(this.SignupValidation.SignupHeightResult)
                     this.errors.push(this.SignupValidation.SignupHeightResult)
