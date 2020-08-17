@@ -61,6 +61,7 @@
                     this.totalCalorie =data["difference_calorie"]
                     this.todayPlusCalorie = data["today_intaked"]
                     this.todayMinusCalorie  = data["today_burned"]
+                    this.fillData()
                 })
                 .catch(function (error) {
                     console.log(error)
@@ -76,7 +77,8 @@
             } else{
                 this.comment = "貯金がマイナスになってしまいましたね。こんな時は運動する量を増やしたり、食事を見直してみたりしましょう！"
             }
-        },mounted () {
+        },
+        mounted () {
             this.fillData()
         },
         methods: {
