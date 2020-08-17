@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <button @click="openInputModal" class="btn btn-outline-info col-lg-2 col-auto">入力して追加する</button>
-            <button class="btn btn-outline-primary col-lg-2 col-auto ml-3">選択して追加する</button>
+            <button @click="openSelectModal" class="btn btn-outline-primary col-lg-2 col-auto ml-3">選択して追加する</button>
             <button @click="enterInformation" class="btn btn-outline-success col-lg-2 col-3 ml-auto">決定</button>
         </div>
 
@@ -63,11 +63,65 @@
             </inputMyModal>
         </div>
 
+        <div class="example-modal-window">
+            <!-- コンポーネント MyModal -->
+            <inputMyModal @close="closeSelectModal" v-if="selectModal">
+                <!-- default スロットコンテンツ -->
+                <h4 class="px-lg-5 mx-5">分類を選択してください</h4>
+                <table class="table table-hover table-sm ">
+                    <thead>
+                    <tr class="table-info">
+                        <th class="genre">分類</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="item in genreBox" v-bind:key="item.id">
+                        <td @click="getFood(item)">{{ item.genre_name }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- /default -->
+                <!-- footer スロットコンテンツ -->
+                <template slot="footer">
+                    <button @click="closeSelectModal" class="btn btn-outline-secondary">キャンセル</button>
+                </template>
+                <!-- /footer -->
+            </inputMyModal>
+        </div>
+
+        <div class="example-modal-window">
+            <!-- コンポーネント MyModal -->
+            <inputMyModal @close="closeFoodSelectModal" v-if="selectFoodModal">
+                <!-- default スロットコンテンツ -->
+                <h4 class="px-lg-5 mx-5">食べ物を選択してください</h4>
+                <table class="table table-hover table-sm ">
+                    <thead>
+                    <tr class="table-info">
+                        <th class="food">食品</th>
+                        <th class="calorie">カロリー</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="item in foodBox" v-bind:key="item.id">
+                        <td @click="addSelectData(item.food_name,item.food_calorie)">{{ item.food_name }}</td>
+                        <td @click="addSelectData(item.food_name,item.food_calorie)">{{item.food_calorie}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- /default -->
+                <!-- footer スロットコンテンツ -->
+                <template slot="footer">
+                    <button @click="closeFoodSelectModal" class="btn btn-outline-secondary">キャンセル</button>
+                </template>
+                <!-- /footer -->
+            </inputMyModal>
+        </div>
+
     </div>
 </template>
 
 <script>
-    import inputMyModal from "./MyModal";
+    import inputMyModal from "./MyModal"
     import Vue from 'vue'
     import VCalendar from 'v-calendar'
     Vue.use(VCalendar)
@@ -80,6 +134,7 @@
                 //モーダル
                 inputModal:false,
                 selectModal:false,
+                selectFoodModal:false,
                 //入力のデータ
                 inputFood:"",
                 inputCalorie:"",
@@ -96,6 +151,9 @@
                     input: ['YYYY-MM-DD'],
                 },
                 selectedDate: new Date(),
+                //分類
+                genreBox:[],
+                foodBox:[],
             }
         },
         methods:{
@@ -114,6 +172,23 @@
             openInputModal(){
                 this.inputModal = true
             },
+            //直接入力のモーダルを開く
+            openSelectModal(){
+                this.selectModal = true
+            },
+            //直接入力のモーダルを閉じる
+            closeSelectModal() {
+                this.selectModal = false
+            },
+            //直接入力のモーダルを開く
+            openFoodSelectModal(){
+                this.selectFoodModal = true
+            },
+            //直接入力のモーダルを閉じる
+            closeFoodSelectModal() {
+                this.selectFoodModal = false
+            },
+
             addInputData(){
                 //バリデーション
                 let inputFoodCheck = false
@@ -153,6 +228,41 @@
                     this.inputCalorie = ""
                     this.inputModal = false
                 }
+            },
+            getFood:async function(item){
+                this.selectModal = false
+                this.openFoodSelectModal()
+                const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/calorie/food"
+
+                let getFoodItem ={
+                    'genre_ID':item.genre_ID
+                }
+                const json_data = JSON.stringify(getFoodItem)
+                await fetch(URL,{
+                    mode:'cors',
+                    method:'POST',
+                    body:json_data,
+                    headers:{'Content-type':'application'},
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("食べ物取得:ok")
+                        this.foodBox = data
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                        console.log("食べ物取得:ng")
+                        alert("エラーが発生しました。もう一度やり直してください")
+                    })
+            },
+            addSelectData(food,calorie){
+                let time = this.selectedDate.getFullYear() + ("0" + (this.selectedDate.getMonth() + 1)).slice(-2) +("0" + this.selectedDate.getDate()).slice(-2)
+                this.addItem.push({
+                    add_date:Number(time),
+                    food_calorie: calorie,
+                    food_name: food,
+                })
+                this.closeFoodSelectModal()
             },
             //データ送信
             enterInformation:async function(){
@@ -200,6 +310,24 @@
                     return Number(sum) + Number(item.food_calorie)
                 }, 0)
             }
+        },async created() {
+            const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/calorie/food"
+
+            await fetch(URL,{
+                mode:'cors',
+                method:'Get',
+                headers:{'Content-type':'application'},
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("食べ物分類取得:ok")
+                    this.genreBox = data
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    console.log("食べ物分類取得:ng")
+                    alert("エラーが発生しました。もう一度やり直してください")
+                })
         }
     }
 </script>
