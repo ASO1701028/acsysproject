@@ -158,13 +158,18 @@
             },
             //データ送信
             enterInformation:async function(){
+
+                if (this.addItem.length===0){
+                    alert("一つ以上入力してください")
+                    return
+                }
+
                 const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/schedule/food"
 
                 this.foodArray ={
                     'account_token':this.$store.state.accountToken,
                     'data':this.addItem
                 }
-                console.log(this.foodArray)
 
                 const json_data = JSON.stringify(this.foodArray)
                 await fetch(URL,{
@@ -178,9 +183,11 @@
                         console.log(data)
                         let check = data["isSuccess"]
                         if (check === true){
-                            alert("成功")
+                            console.log("摂取カロリー登録:ok")
+                            this.$router.replace("/savecalorie")
                         }else {
                             alert("エラーが発生しました。もう一度やり直してください")
+                            console.log("摂取カロリー登録:ng")
                         }
                     })
                     .catch(function (error) {
