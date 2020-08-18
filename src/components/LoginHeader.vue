@@ -11,7 +11,6 @@
                         <b-nav-item href="/#/calendar">カレンダー</b-nav-item>
                         <b-nav-item href="/#/statistics">統計</b-nav-item>
                         <b-nav-item href="/#/training">トレーニング</b-nav-item>
-                        <b-nav-item href="/#/post">投稿</b-nav-item>
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">
