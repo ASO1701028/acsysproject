@@ -92,7 +92,7 @@
 </template>
 
 <script>
-    const URL = 'https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users'
+    const URL = 'https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/update'
     export default {
         name: "UserChange",
         data: function () {
@@ -128,21 +128,12 @@
             //----------------------------データ保存---------------------------------------
             Data_post:async function (array) {
 
-                // 生成する文字列の長さ
-                const l = 32;
-                // 生成する文字列に含める文字セット
-                const c = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                const cl = c.length;
-                let newToken = "";
-                for(let i=0; i<l; i++){
-                    newToken += c[Math.floor(Math.random()*cl)];
-                }
 
                 this.post_data = {
                     account_height: Number(array.account_height),
                     account_weight: Number(array.account_weight),
                     account_level: array.account_level,
-                    account_token:newToken,
+                    account_token:this.$store.state.accountToken,
 
                 }
                 const json_data = JSON.stringify(this.post_data)
@@ -161,17 +152,14 @@
                             console.log('登録情報変更ok')
                             this.ChangeResult = true
                         }else {
-                            console.log('登録情報変更ok')
+                            console.log('登録情報変更ng')
+                            this.ChangeResult = false
                         }
                     })
                     .catch(function (error) {
                         console.log(error)
                     })
-                if (this.ChangeResult){
-                    return newToken
-                }else{
-                    return 0
-                }
+                return this.ChangeResult
             },
             //------------------------------------------------------------------------------
 
@@ -253,20 +241,21 @@
                     this.errors.push(this.ChangeValidation.ChangeLevelResult)
                     SignLevel = false
                 }else {
-                    this.SignupValidation.SignupLevelResult = ""
+                    this.ChangeValidation.ChangeLevelResult = ""
                     SignLevel = true
                 }
 
-                //バリデーションをクリアした時にsign-up
+                //バリデーションをクリアした時に登録情報変更
                 if (SignWeight === true && SignHeight === true && SignLevel === true) {
                     const check = await this.Data_post(this.form)
-                    if (check !== 0){
+                    console.log(check)
+                    if (check){
                         //登録時
                         this.$store.commit('tokenUpdate',check)
                         await this.$router.replace("/savecalorie")
                     }else {
                         //エラーや存在しなかった場合
-                        console.log("アカウントが存在しないもしくわエラー")
+                        console.log("アカウントが存在しないもしくはエラー")
                         alert("エラーが発生しました。もう一度やり直してください")
                     }
                 }
