@@ -24,7 +24,6 @@
                     aspect="16by9"
                     src="https://www.youtube.com/embed/qOiDlprXF2w"
                     allowfullscreen></b-embed>
-
         </b-modal>
     </div>
 </template>
