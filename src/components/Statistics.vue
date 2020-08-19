@@ -77,41 +77,6 @@
             let getDay = new Date(year,month-1,day)
             const getTime = getDay.getTime()
             this.timeDay = Math.floor((getTodayTime-getTime) / (1000 * 60 * 60 * 24))
-
-            //通信
-            const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/statistics"
-            this.dataGet={
-                account_token:this.$store.state.accountToken,
-                year:this.year
-            }
-            const json_data = JSON.stringify(this.dataGet)
-            await fetch(URL,{
-                mode:'cors',
-                method:'POST',
-                body:json_data,
-                headers:{'Content-type':'application'},
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const flg_data = data["isSuccess"]
-                    if (flg_data){
-                        console.log("カロリー統計取得:ok")
-                        this.intaked = data["intaked"]
-                        this.burned = data["burned"]
-                        for (let i = 0; i < 12; i++) {
-                            this.calorieBox[i] =  this.intaked[i] - this.burned[i]
-                        }
-                        this.fillData()
-                    }else {
-                        console.log("カロリー統計取得:ng")
-                        alert("エラーが発生しました。もう一度やり直してください")
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error)
-                    alert("エラーが発生しました。もう一度やり直してください")
-                })
-            this.spiner = true
         },
         mounted () {
             this.fillData()
