@@ -83,15 +83,11 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
-                    if (data["intaked"].length !== 0){
-                        console.log("カレンダー情報取得:ok")
-                        this.intaked = data["intaked"]
-                        this.burned = data["burned"]
-                    }else {
-                        console.log("カレンダー情報取得:ng")
-                        alert("エラーが発生しました。もう一度やり直してください")
-                    }
+                    console.log("カレンダー情報取得:ok")
+                    this.intaked.splice(0,this.intaked.length)
+                    this.burned.splice(0,this.burned.length)
+                    this.intaked = data["intaked"]
+                    this.burned = data["burned"]
                 })
                 .catch(function (error) {
                     console.log(error)
