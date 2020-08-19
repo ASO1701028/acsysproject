@@ -12,7 +12,6 @@ import IntakeCalorieRegistration from "../components/IntakeCalorieRegistration"
 import Calender from  "../components/Calendar"
 import Training from "../components/Training"
 import Statistics from "../components/Statistics"
-import Post from "../components/Post"
 import UserChange from "../components/UserChange"
 
 // store
@@ -80,11 +79,6 @@ const router = new Router({
             path: "/statistics",
             name: "statistics",
             component: Statistics,
-        },
-        {
-            path: "/post",
-            name: "post",
-            component: Post,
         },
         {
             path: "/userchange",
