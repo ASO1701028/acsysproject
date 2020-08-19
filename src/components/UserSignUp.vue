@@ -334,8 +334,8 @@
                     this.errors.push(this.SignupValidation.SignupBirthdayResult)
                     SignBirthDay = false
                 }
-                else if (!re2.test(this.form.account_year) || !re3.test(this.form.account_month) || !re3.test(this.form.account_day)) {
-                    this.SignupValidation.SignupBirthdayResult = "数値以外の値が含まれています"
+                else if (!re2.test(this.form.account_year) || !re2.test(this.form.account_month) || !re2.test(this.form.account_day)) {
+                    this.SignupValidation.SignupBirthdayResult = "数値以外の値、もしくは全角が含まれています"
                     console.log(this.SignupValidation.SignupBirthdayResult)
                     this.errors.push(this.SignupValidation.SignupBirthdayResult)
                     SignBirthDay = false
@@ -370,7 +370,7 @@
                     this.errors.push(this.SignupValidation.SignupWeightResult)
                     SignWeight = false
                 }
-                else if (!re3.test(this.form.account_weight)) {
+                else if (!re2.test(this.form.account_weight)) {
                     this.SignupValidation.SignupWeightResult = "数値以外の値、もしくは全角が含まれています"
                     console.log(this.SignupValidation.SignupWeightResult)
                     this.errors.push(this.SignupValidation.SignupWeightResult)
@@ -399,21 +399,21 @@
                     this.errors.push(this.SignupValidation.SignupHeightResult)
                     SignHeight = false
                 }
-                else if (!re3.test(this.form.account_height)) {
-                    this.SignupValidation.SignupeHightResult = "数値以外の値、もしくは全角が含まれています"
-                    console.log(this.SignupValidation.SignupeHightResult)
+                else if (!re2.test(this.form.account_height)) {
+                    this.SignupValidation.SignupHeightResult = "数値以外の値、もしくは全角が含まれています"
+                    console.log(this.SignupValidation.SignupHeightResult)
                     this.errors.push(this.SignupValidation.SignupHeightResult)
                     SignHeight = false
                 }
                 else if (this.form.account_height < 80) {
                     this.SignupValidation.SignupHeightResult = "低すぎです"
-                    console.log(this.SignupValidation.SignupeHightResult)
+                    console.log(this.SignupValidation.SignupHeightResult)
                     this.errors.push(this.SignupValidation.SignupHeightResult)
                     SignHeight = false
                 }
                 else if (this.form.account_height > 300) {
                     this.SignupValidation.SignupHeightResult = "高すぎです"
-                    console.log(this.SignupValidation.SignupeHightResult)
+                    console.log(this.SignupValidation.SignupHeightResult)
                     this.errors.push(this.SignupValidation.SignupHeightResult)
                     SignHeight = false
                 }
