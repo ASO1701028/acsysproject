@@ -66,17 +66,17 @@
         }
         ,async created() {
             //日付の差分取得
+            getDay = new Date()
+            const getTodayTime = getDay.getTime()
+            this.year=getDay.getFullYear()
             const startDay = String(this.$store.state.accountStartDay)
             this.dayBox=startDay.split("")
             const year = this.dayBox[0] + this.dayBox[1] + this.dayBox[2] + this.dayBox[3]
             const month = this.dayBox[4] + this.dayBox[5]
             const day = this.dayBox[6] + this.dayBox[7]
-            let getDay = new Date(year,month,day)
+            let getDay = new Date(year,month-1,day)
             const getTime = getDay.getTime()
-            getDay = new Date()
-            const getTodayTime = getDay.getTime()
-            this.year=getDay.getFullYear()
-            this.timeDay = Math.ceil((getTime - getTodayTime) / 864000000)
+            this.timeDay = Math.floor((getTodayTime-getTime) / (1000 * 60 * 60 * 24))
 
             //通信
             const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/statistics"
