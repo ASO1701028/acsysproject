@@ -26,8 +26,8 @@
                     <tbody>
                     <tr v-for="item in 12" v-bind:key="item">
                         <td>{{ item }}月</td>
-                        <td>{{burned[item-1]}}</td>
                         <td>{{intaked[item-1]}}</td>
+                        <td>{{burned[item-1]}}</td>
                         <td>{{calorieBox[item-1]}}</td>
                     </tr>
                     <td v-if="!burned.length">リストは空です</td>

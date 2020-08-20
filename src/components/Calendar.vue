@@ -27,7 +27,7 @@
                 </tbody>
             </table>
             <h4 class="col-xs-6 col-auto pb-2">摂取カロリー合計：{{sumFoodCalories}}kcal</h4>
-            <table class="table table-hover table-sm col-auto">
+            <table class="table table-sm col-auto">
                 <thead>
                 <tr class="table-danger">
                     <th class="training">トレーニング</th>
