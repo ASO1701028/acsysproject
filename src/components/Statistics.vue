@@ -183,7 +183,7 @@
                             this.intaked = data["intaked"]
                             this.burned = data["burned"]
                             for (let i = 0; i < 12; i++) {
-                                this.calorieBox[i] =  this.intaked[i] - this.burned[i]
+                                this.calorieBox[i] =  this.burned[i] - this.intaked[i]
                             }
                             this.fillData()
                         }else {

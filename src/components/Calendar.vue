@@ -117,6 +117,7 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log("カレンダー情報取得:ok")
+                        console.log(data)
                         this.intaked.splice(0,this.intaked.length)
                         this.burned.splice(0,this.burned.length)
                         this.intaked = data["intaked"]
