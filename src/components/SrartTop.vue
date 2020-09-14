@@ -8,27 +8,3 @@
         </div>
     </div>
 </template>
-
-<style scoped>
-
-    .jumbotron-extend {
-        position: relative;
-        height: 91.3vh;
-        min-height: 300px;
-        background: url(../assets/StartTopImage.jpg) no-repeat center center;
-        background-size: cover;
-        color: white;
-    }
-
-    .jumbotron-container {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    #StartUp{
-        position: relative;
-        top: 10px;
-    }
-
-</style>
