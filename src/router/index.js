@@ -13,6 +13,7 @@ import Calender from  "../components/Calendar"
 import Training from "../components/Training"
 import Statistics from "../components/Statistics"
 import UserChange from "../components/UserChange"
+import UpdateInformation from "../components/UpdateInformation"
 
 // store
 import Store from '../store/index'
@@ -84,6 +85,14 @@ const router = new Router({
             path: "/userchange",
             name: "userchange",
             component: UserChange,
+        },
+        {
+            path: "/updateinformation",
+            name: "updateinformation",
+            component: UpdateInformation,
+            meta: {
+                isPublic: true
+            }
         }
     ]
 })
