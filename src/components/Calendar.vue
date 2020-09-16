@@ -1,76 +1,146 @@
 <template>
-    <div id="#calc">
-        <FullCalendar
-                default-view="dayGridMonth"
-                :locale="locale"
-                :header="calendarHeader"
-                :weekends="calendarWeekends"
-                :plugins="calendarPlugins"
-                :events="calendarEvents"
-                @dateClick="handleDateClick"
-        />
+    <div id='app' class="container">
+        <v-date-picker
+                :mode="mode"
+                v-model="selectedDate"
+                is-inline
+                is-expanded
+        ></v-date-picker>
+        <div v-if="!spiner">
+            <button class="btn btn-primary" type="button" disabled>
+                <span class="spinner-border" role="status" aria-hidden="true"></span> Loading...</button>
+        </div>
+        <div v-if="spiner">
+            <table class="table table-sm col-auto mt-3">
+                <thead>
+                <tr class="table-info">
+                    <th class="food">食品</th>
+                    <th class="calorie">カロリー</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in intaked" v-bind:key="item.id">
+                    <td>{{ item.food_name }}</td>
+                    <td>{{ item.food_calorie }}kcal</td>
+                </tr>
+                <td v-if="!intaked.length">何も登録されていません</td>
+                </tbody>
+            </table>
+            <h4 class="col-xs-6 col-auto pb-2">摂取カロリー合計：{{sumFoodCalories}}kcal</h4>
+            <table class="table table-sm col-auto">
+                <thead>
+                <tr class="table-danger">
+                    <th class="training">トレーニング</th>
+                    <th class="calorie">カロリー</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in burned" v-bind:key="item.id">
+                    <td>{{ item.motion_name }}</td>
+                    <td>{{ item.motion_calorie }}kcal</td>
+                </tr>
+                <td v-if="!burned.length">何も登録されていません</td>
+                </tbody>
+            </table>
+            <h4 class="col-xs-6 col-auto pt-1 pb-2">消費カロリー合計：{{sumTrainingCalories}}kcal</h4>
+        </div>
     </div>
 </template>
 
 <script>
-    import FullCalendar from '@fullcalendar/vue'
-    import dayGridPlugin from '@fullcalendar/daygrid'
-    import timeGridPlugin from '@fullcalendar/timegrid'
-    import interactionPlugin from '@fullcalendar/interaction'
-    import jaLocale from '@fullcalendar/core/locales/ja' // 日本語化用
+    import Vue from 'vue'
+    import VCalendar from 'v-calendar'
+    Vue.use(VCalendar)
 
-    export default {
-        components: {
-            FullCalendar // make the <FullCalendar> tag available
-        },
-        data: function () {
+    export  default {
+        data() {
             return {
-                locale: jaLocale, // 日本語化
-                // カレンダーヘッダーのデザイン
-                calendarHeader: {
-                    left: "prev,next today",
-                    center: "title",
-                    right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
-                },
-                calendarWeekends: true, // 土日を表示するか
-                // カレンダーで使用するプラグイン
-                calendarPlugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-                // カレンダーに表示するスケジュール一覧
-                calendarEvents: [
-                    {
-                        title: "報告会",
-                        start: "2020-03-10T10:00:00",
-                        end: "2020-03-10T12:30:00"
-                    },
-                    {
-                        title: "ミーティング",
-                        start: "2020-03-12T10:30:00",
-                        end: "2020-03-12T12:30:00"
-                    },
-                    {
-                        title: "打ち合わせ",
-                        start: "2020-03-18T13:30:00",
-                        end: "2020-03-18T14:30:00"
-                    }
-                ]
-            };
-        },
-        methods: {
-            handleDateClick(arg){
-                if(confirm("新しいスケジュールを" + arg.dateStr + "に追加しますか？")){
-                    this.calendarEvents.push({
-                        // add new event data
-                        title: "新規スケジュール",
-                        start: arg.date,
-                        allDay: arg.allDay
-                    })
-                }
+                mode: 'single',
+                selectedDate: new Date(),
+                selectDay: "",
+                dataGet:"",
+                burned:[],
+                intaked:[],
+                spiner:false
             }
-        }
-    };
-</script>
+        }, async created() {
+            const selectYear = this.selectedDate.getFullYear()
+            const selectMonth = ("0" + (this.selectedDate.getMonth() + 1)).slice(-2)
+            const selectDay = ("0" + this.selectedDate.getDate()).slice(-2)
+            this.selectDay = "" + selectYear + selectMonth + selectDay
 
-<style scoped>
-    @import '~@fullcalendar/core/main.css';
-    @import "~@fullcalendar/daygrid/main.css";
-</style>
+            const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/schedule"
+            this.dataGet={
+                account_token:this.$store.state.accountToken,
+                add_date:Number(this.selectDay)
+            }
+            const json_data = JSON.stringify(this.dataGet)
+            await fetch(URL,{
+                mode:'cors',
+                method:'POST',
+                body:json_data,
+                headers:{'Content-type':'application'},
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("カレンダー情報取得:ok")
+                    this.intaked.splice(0,this.intaked.length)
+                    this.burned.splice(0,this.burned.length)
+                    this.intaked = data["intaked"]
+                    this.burned = data["burned"]
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    alert("エラーが発生しました。もう一度やり直してください")
+                })
+            this.spiner = true
+        }, watch: {
+            selectedDate: async function () {
+                this.spiner = false
+                const selectYear = this.selectedDate.getFullYear()
+                const selectMonth = ("0" + (this.selectedDate.getMonth() + 1)).slice(-2)
+                const selectDay = ("0" + this.selectedDate.getDate()).slice(-2)
+                this.selectDay = "" + selectYear + selectMonth + selectDay
+
+                const URL = "https://fat3lak1i2.execute-api.us-east-1.amazonaws.com/acsys/users/schedule"
+                this.dataGet={
+                    account_token:this.$store.state.accountToken,
+                    add_date:Number(this.selectDay)
+                }
+                const json_data = JSON.stringify(this.dataGet)
+                await fetch(URL,{
+                    mode:'cors',
+                    method:'POST',
+                    body:json_data,
+                    headers:{'Content-type':'application'},
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("カレンダー情報取得:ok")
+                        console.log(data)
+                        this.intaked.splice(0,this.intaked.length)
+                        this.burned.splice(0,this.burned.length)
+                        this.intaked = data["intaked"]
+                        this.burned = data["burned"]
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                        alert("エラーが発生しました。もう一度やり直してください")
+                    })
+                this.spiner = true
+            }
+        },
+        computed: {
+            sumFoodCalories() {
+                return this.intaked.reduce(function (sum, item) {
+                    return Number(sum) + Number(item.food_calorie)
+                }, 0)
+            },
+            sumTrainingCalories() {
+                return this.burned.reduce(function (sum, item) {
+                    return Number(sum) + Number(item.motion_calorie)
+                }, 0)
+            },
+        }
+    }
+</script>

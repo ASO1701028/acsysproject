@@ -1,26 +1,44 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Calendar from "../components/Calendar";
+import Vue from 'vue'
+import Router from 'vue-router'
 
-import UserLogin from '@/components/UserLogin'
-import UserSignUp from '@/components/UserSignUp'
-// import Calorie from '@/components/Calendar';
-// import Calendar from "@/components/Calendar";
+// components
+import StartTop from "../components/StartTop"
+import UserLogin from '../components/UserLogin'
+import UserSignUp from '../components/UserSignUp'
+import UserGuide from "../components/UserGuide"
+import SaveCalorie from '../components/SaveCalorie'
+import ConsumptionCalorieRegistration from "../components/ConsumptionCalorieRegistration"
+import IntakeCalorieRegistration from "../components/IntakeCalorieRegistration"
+import Calender from  "../components/Calendar"
+import Training from "../components/Training"
+import Statistics from "../components/Statistics"
+import UserChange from "../components/UserChange"
 
-// import Home from "../views/login.vue";
+// store
+import Store from '../store/index'
 
-Vue.use(VueRouter);
+Vue.use(Router)
 
-const routes = [
-    {
-        path: "/login",
-        name: "login",
-        component: UserLogin,
-             meta: {
-                 isPublic: true
-             }
-    },
-    {
+const router = new Router({
+
+    routes: [
+        {
+            path: '/',
+            name: 'StartTop',
+            component: StartTop,
+            meta: {
+                isPublic: true
+            }
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: UserLogin,
+            meta: {
+                isPublic: true
+            }
+        },
+        {
             path: '/signup',
             name: 'signup',
             component: UserSignUp,
@@ -28,75 +46,55 @@ const routes = [
                 isPublic: true
             }
         },
-    ///////ここに追記///////
-    {
-        path: "/calendar",
-        name: "calendar",
-        component: () =>import("../components/Calendar")
+        {
+            path: '/userguide',
+            name: 'userguide',
+            component: UserGuide,
+            meta: {
+                isPublic: true
+            }
+        },
+        {
+            path: '/savecalorie',
+            component: SaveCalorie,
+        },
+        {
+            path: '/consumptioncalorie',
+            component: ConsumptionCalorieRegistration,
+        },
+        {
+            path: '/intakecalorie',
+            component: IntakeCalorieRegistration
+        },
+        {
+            path: "/calendar",
+            component: Calender
+        },
+        {
+            path: "/training",
+            name: "training",
+            component: Training,
+        },
+        {
+            path: "/statistics",
+            name: "statistics",
+            component: Statistics,
+        },
+        {
+            path: "/userchange",
+            name: "userchange",
+            component: UserChange,
+        }
+    ]
+})
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(page => page.meta.isPublic) || Store.state.accountToken) {
+        next()
+    } else {
+        next('/login')
     }
-    ///////ここに追記///////
-];
+})
 
-const router = new VueRouter({
-    routes
-});
-
-export default router;
-
-
-
-
-
-
-
-
-// import Vue from 'vue'
-// import Router from 'vue-router'
-//
-// // components
-// import UserLogin from '@/components/UserLogin'
-// import UserSignUp from '@/components/UserSignUp'
-// import Save_Calorie from '@/components/Save_Calorie';
-// // import Calendar from "@/components/Calendar";
-//
-// Vue.use(Router)
-//
-// export default new Router({
-//
-// // const router = new Router({
-//     routes: [
-//         {
-//             path: '/login',
-//             name: 'login',
-//             component: UserLogin,
-//             meta: {
-//                 isPublic: true
-//             }
-//         },
-//         {
-//             path: '/signup',
-//             name: 'signup',
-//             component: UserSignUp,
-//             meta: {
-//                 isPublic: true
-//             }
-//         },
-//         {
-//             path: '/Save_Calorie',
-//             component: Save_Calorie,
-//         },
-//         {
-//             path: '/calendar',
-//             name: 'calendar',
-//             component: () =>import("@/components/Calendar.vue")
-//         }
-//     ]
-// });
-
-// router.beforeEach((to,from,next)=>{
-//     if(to.matched.some(page => page.meta.isPublic) || Store.state.auth.token) {
-//         next()
-//     }else {
-//         next('/login')
-//     }
-// })
+export default router

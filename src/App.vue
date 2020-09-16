@@ -1,108 +1,41 @@
 <template>
-  <div id="#app">
-    <header>
-      <div id="HeaderBackGroundColor">
-        <input type="button" @click="StartLogin" value="ログイン" id="HeaderLoginButton" class="btn-flat-vertical-border-login">
-        <input type="button" @click="StartSignUp" value="新規登録" id="HeaderSignInButton" class="btn-flat-vertical-border-signin">
-      </div>
-    </header>
-<!--    <div id="app">-->
-<!--      <router-link to="/calendar">Calendar</router-link>-->
-<!--    </div>-->
-    <router-view />
+  <div>
+<!--  headerの設定-->
+      <LoginHeader v-if="this.$store.state.accountToken" ></LoginHeader>
+      <TopHeader v-else-if="!this.$store.state.accountToken"></TopHeader>
+      <transition mode="out-in">
+          <router-view />
+      </transition>
   </div>
 </template>
 
 <script>
-  import Calendar from "./components/Calendar";
+
+  import TopHeader from './components/TopHeader.vue'
+  import LoginHeader from './components/LoginHeader.vue'
 
   export default {
     name: 'App',
-    data(){
-      return{
-        UserToken:""
-      }
+    components:{
+        TopHeader,
+        LoginHeader,
     },
-    methods:{
-      StartLogin:function () {
-        this.$router.push("/login")
-      },
-      StartSignUp:function () {
-        this.$router.push("/signup")
-      },
-      components: {
-        Calendar,
-      }
-    }
   }
 </script>
 
 <style>
-  html {
-    background: #E6FFE9;
-    color: #5c905c;
+    /*アニメーションの設定*/
+  .v-enter-active, .v-leave-active {
+      transition: opacity .3s;
   }
-</style>
-
-<style scoped>
-
-  #HeaderBackGroundColor{
-    background-color: white;
-    background-size: contain;
-    margin-top: -10px;
-    margin-left: -6px;
-    margin-right: -6px;
+  .v-enter, .v-leave-to {
+      opacity: 0;
   }
-
-  input{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: right;
-    position: relative;
-    padding: 0.8em;
-  }
-
-  #HeaderLoginButton{
-    left: 82%;
-  }
-
-  #HeaderSignInButton{
-    left: 84%;
-  }
-
-  .btn-flat-vertical-border-login {
-    position: relative;
-    display: inline-block;
-    font-weight: bold;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    border-left: solid 4px #FF839007;
-    border-right: solid 4px #FF839007;
-    color: #ffffff;
-    background: #5c905c;
-    transition: .4s;
-  }
-
-  .btn-flat-vertical-border-login:hover {
-    background: #283d28;
-    color: #FFF;
-  }
-
-  .btn-flat-vertical-border-signin {
-    position: relative;
-    display: inline-block;
-    font-weight: bold;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    border-left: solid 4px #FF839007;
-    border-right: solid 4px #FF839007;
-    color: #ffffff;
-    background: #a77348;
-    transition: .4s;
-  }
-
-  .btn-flat-vertical-border-signin:hover {
-    background: #493100;
-    color: #FFF;
-  }
+   html{
+       background-image: url(./assets/StartTopImage.jpg);
+       background-position: center center;
+       background-repeat: no-repeat;
+       background-size: cover;
+       background-attachment: fixed;
+   }
 </style>
