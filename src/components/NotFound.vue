@@ -1,6 +1,11 @@
 <template>
-    <div>
-        <h1>Oops!!! Page Not Found</h1>
+    <div class="container">
+        <div class="mt-3">
+            <h1 class="display-3">404 Not Found</h1>
+            <div class="lead">
+                指定されたページは見つかりませんでした
+            </div>
+        </div>
     </div>
 </template>
 
@@ -9,7 +14,3 @@
         name: "NotFound"
     }
 </script>
-
-<style scoped>
-
-</style>
