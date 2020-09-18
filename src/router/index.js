@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import StartTop from "../components/StartTop"
 import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
+import UserGuide from "../components/UserGuide"
 import SaveCalorie from '../components/SaveCalorie'
 import ConsumptionCalorieRegistration from "../components/ConsumptionCalorieRegistration"
 import IntakeCalorieRegistration from "../components/IntakeCalorieRegistration"
@@ -12,10 +13,10 @@ import Calender from  "../components/Calendar"
 import Training from "../components/Training"
 import Statistics from "../components/Statistics"
 import UserChange from "../components/UserChange"
+import UpdateInformation from "../components/UpdateInformation"
 
 // store
 import Store from '../store/index'
-import NotFound from "../components/NotFound";
 
 Vue.use(Router)
 
@@ -61,7 +62,6 @@ const router = new Router({
             //消費カロリー入力
             path: '/consumptioncalorie',
             component: ConsumptionCalorieRegistration,
-            name: 'consumptioncalorie',
         },
         {
             //摂取カロリー入力
@@ -98,6 +98,14 @@ const router = new Router({
             path: "/*",
             name: 'notfound',
             component: NotFound,
+        },
+        {
+            path: "/updateinformation",
+            name: "updateinformation",
+            component: UpdateInformation,
+            meta: {
+                isPublic: true
+            }
         }
     ]
 })
