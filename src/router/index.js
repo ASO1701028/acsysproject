@@ -5,7 +5,6 @@ import Router from 'vue-router'
 import StartTop from "../components/StartTop"
 import UserLogin from '../components/UserLogin'
 import UserSignUp from '../components/UserSignUp'
-import UserGuide from "../components/UserGuide"
 import SaveCalorie from '../components/SaveCalorie'
 import ConsumptionCalorieRegistration from "../components/ConsumptionCalorieRegistration"
 import IntakeCalorieRegistration from "../components/IntakeCalorieRegistration"
@@ -13,10 +12,11 @@ import Calender from  "../components/Calendar"
 import Training from "../components/Training"
 import Statistics from "../components/Statistics"
 import UserChange from "../components/UserChange"
-import UpdateInformation from "../components/UpdateInformation"
+import NotFound from "../components/NotFound";
 
 // store
 import Store from '../store/index'
+import UpdateInformation from "../components/UpdateInformation";
 
 Vue.use(Router)
 
@@ -94,19 +94,20 @@ const router = new Router({
             component: UserChange,
         },
         {
+            //更新情報
+            path: '/updateinformation',
+            name: 'updateinformation',
+            component: UpdateInformation,
+            meta: {
+                isPublic: true
+            }
+        },
+        {
             //NotFound
             path: "/*",
             name: 'notfound',
             component: NotFound,
         },
-        {
-            path: "/updateinformation",
-            name: "updateinformation",
-            component: UpdateInformation,
-            meta: {
-                isPublic: true
-            }
-        }
     ]
 })
 
