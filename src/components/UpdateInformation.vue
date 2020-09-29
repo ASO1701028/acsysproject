@@ -13,7 +13,7 @@
                 <div class="col lead ">
                     内容
                 </div>
-            </div>
+            </div><!-- /.row -->
             <hr>
             <div class="row mb-3">
                 <div class="col-3 lead">
@@ -24,7 +24,7 @@
                     ぜひフォローしてください！
                     <a href="https://twitter.com/acsys_calorie">Twitterアカウントはこちら</a>
                 </div>
-            </div>
+            </div><!-- /.row mb-3 -->
             <div class="row mb-3">
                 <div class="col-3 lead">
                     8月20日
@@ -41,7 +41,7 @@
                     ・新しく摂取カロリーを登録すると、前に登録した摂取カロリーが消えること。<br>
                     ・統計機能でリストにある貯金の表示ミスを修正しました。
                 </div>
-            </div>
+            </div><!-- /.row mb-3 -->
             <div class="row mb-3">
                 <div class="col-3 lead">
                     8月14日
@@ -49,20 +49,50 @@
                 <div class="col lead">
                     サイト公開しました。
                 </div>
+            </div><!-- /.row mb-3 -->
+        </div><!-- /.container -->
+        <hr class="featurette-divider  mt-5">
+        <footer class="container">
+            <div class="text-center">
+                <div class="sosyal">
+                    <a href="https://twitter.com/acsys_calorie" class="twitter">acsys公式Twitter</a>
+                </div>
             </div>
-        </div>
+            <p class="float-right"><a href="/updateinformation" class="btn btn-outline-success">トップに戻る</a></p>
+            <p>2020 麻生ビジネス専門学校情報工学科2班<br>
+                お問い合わせ:1701017@st.asojuku.ac.jp</p>
+        </footer><!-- /.footer -->
     </div>
 </template>
-
-<script>
-    export default {
-        name: "UpdateInformation"
-    }
-</script>
 
 <style scoped>
     .jumbotron {
         background-position: center 60%;
         color: white;
+    }
+    .sosyal {
+        margin: 50px auto;
+    }
+    .twitter {
+        background-color: #008DDE;
+        box-shadow: 0 4px 0 #0078BD;
+
+        display: inline;
+        position: relative;
+        font-family: Arial;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        border-radius: 5px;
+        padding: 14px 80px;
+    }
+    .twitter:active {
+        top: 2px;
+        box-shadow: 0 2px 0 #0078BD;
+    }
+    .twitter:hover {
+        background-color: #1397D8;
     }
 </style>
