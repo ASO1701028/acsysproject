@@ -50,29 +50,129 @@
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->
 
-            <hr class="featurette-divider  mt-5 pb-5">
 
-            <div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading">シンプルなデザイン<span class="text-muted"> 直感的に操作できる。</span></h2>
-                    <p class="lead">画像に表示されているのはカロリー貯金画面です。今までの貯金や摂取、消費カロリーがすぐにわかるようになっています。またこの画面からカロリーの入力画面には簡単に移ることが出来ます。</p>
-                </div>
-                <div class="col-md-5">
-                    <img src="../assets/topPage.png" class="img-fluid" alt="Responsive image">
-                </div>
-            </div><!-- /.row featurette -->
-            <hr class="featurette-divider  mt-5">
-        </div><!-- /.container -->
-        <footer class="container">
-            <div class="text-center">
-                <div class="sosyal">
-                    <a href="https://twitter.com/acsys_calorie" class="twitter">acsys公式Twitter</a>
+            <!-- スクロールスパイ -->
+            <div class="scroll">
+                <b-navbar toggleable="lg" type="dark"  variant="dark" class=" align-bottom fixed-bottom">
+                    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+                        <b-navbar-toggle target="moku"></b-navbar-toggle>
+                        <b-collapse id="moku" is-nav>
+                            <ul class="nav nav-pills flex-column flex-lg-row ml-auto">
+                                <li class="nav-item"><a class="nav-link" href="#page1">現在の貯金</a> </li>
+                                <li class="nav-item"><a class="nav-link" href="#page2">摂取カロリー登録</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#page3">消費カロリー登録</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#page4">カレンダー画面</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#page5">統計画面</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#page6">トレーニング画面</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">TOP</a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#menu1">メニュー</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </b-collapse>
+                    </nav>
+                </b-navbar>
+                <div class="container py-2">
+                    <div id="page1">
+                        <h3>現在の貯金</h3>
+                        <ul>
+                            <li>摂取カロリーと消費カロリーの差分です。（摂取が多いと「＋」、消費が多いと「-」）</li>
+                            <li>目安としてダイエットされたい方は貯金が「-」になるよう目指してください。</li>
+                            <li>本日の消費カロリーと摂取カロリーの棒グラフが表示されています。</li>
+                        </ul>
+                        <hr class="featurette-divider  mt-5">
+                    </div>
+                    <div id="page2">
+                        <h3>摂取カロリー登録</h3>
+                        <ul>
+                            <li>食事した日付の入力。</li>
+                            <li>入力して追加する</li>
+                            <ul><li>食べ物名、摂取カロリーを手動で入力または、既存の食品を選択できます。</li></ul>
+                            <li>選択して追加する</li>
+                            <ul><li>分類を選択し、食事した食品を選ぶことによってリストに追加されます。</li></ul>
+                            <li>間違った入力をした場合は削除項目の「-」ボタンをクリックしていただくと削除できます。</li>
+                            <li>リストの入力に間違いがなければ決定を押していただくと反映されます。</li>
+                        </ul>
+                        <hr class="featurette-divider  mt-5">
+                    </div>
+                    <div id="page3">
+                        <!--                    <p><font size="30px" color="white">あ</font></p>-->
+                        <h3>消費カロリー登録</h3>
+                        <ul>
+                            <li>入力して追加する</li>
+                            <ul><li>トレーニング名とカロリーを入力してもらい「追加」ボタンを押すことによってリストに追加されます。</li></ul>
+                            <li>選択して追加する</li>
+                            <ul><li>分類を選んでもらって、トレーニング名を選択することによってリストに追加されます。</li></ul>
+                            <li>上部左にあるacsysのロゴをクリックしていただくと、TOPページへどのページにいても戻ってくることができます。</li>
+                        </ul>
+                        <hr class="featurette-divider  mt-5">
+                    </div>
+                    <div id="page4">
+                        <h3>カレンダー画面</h3>
+                        <ul>
+                            <li>初めの日付は当日が選択されており、その日の摂取カロリーと消費カロリーが表示されます。</li>
+                            <li>自分の確認したい日付を選択してもらうことによってその日の摂取カロリーと消費カロリーが表示されます。</li>
+                        </ul>
+                        <hr class="featurette-divider  mt-5">
+                    </div>
+                    <div id="page5">
+                        <h3>統計画面</h3>
+                        <ul>
+                            <li>各月ごとの合計の摂取カロリー、消費カロリー、貯金が確認できます。</li>
+                            <li>西暦の左右にある「＋」、「-」を選択していただくと西暦が１年ごとに変化します。</li>
+                            <li>グラフでその年の貯金が増えやすい月などを見ていただき参考にしていただく画面です。</li>
+                        </ul>
+                        <hr class="featurette-divider  mt-5">
+                    </div>
+                    <div id="page6">
+                        <h3>トレーニング画面</h3>
+                        <ul>
+                            <li>私たちが事前に用意させていただいた動画を達成していただくことによって消費カロリーを増やすことができます</li>
+                            <li>挑戦してみるをクリックしていただき、実際にトレーニングしていただいた場合は「達成」をほかのトレーニングをしたい場合は「キャンセル」をクリックしてください</li>
+                            <li>「達成」ボタンを押すと自動でその日の消費カロリーが入力されるのでどんどんチャレンジしてみてください。</li>
+                        </ul>
+                        <hr class="featurette-divider  mt-5">
+                    </div>
+                    <div id="menu1">
+                        <p></p>
+                    </div>
+                    <div class="text-center">
+                        <div class="sosyal">
+                            <a href="https://twitter.com/acsys_calorie" class="twitter">acsys公式Twitter</a>
+                        </div>
+                    </div>
+                    <center><p>2020 麻生ビジネス専門学校情報工学科2班<br>
+                        お問い合わせ:1701017@st.asojuku.ac.jp</p></center>
+                    <p><font color="white">あ</font></p>
+                    <p>あ</p>
                 </div>
             </div>
-            <p class="float-right"><a href="/" class="btn btn-outline-success">トップに戻る</a></p>
-            <p>2020 麻生ビジネス専門学校情報工学科2班<br>
-                お問い合わせ:1701017@st.asojuku.ac.jp</p>
-        </footer><!-- /.footer -->
+
+<!--            <hr class="featurette-divider  mt-5 pb-5">-->
+
+<!--            <div class="row featurette">-->
+<!--                <div class="col-md-7">-->
+<!--                    <h2 class="featurette-heading">シンプルなデザイン<span class="text-muted"> 直感的に操作できる。</span></h2>-->
+<!--                    <p class="lead">画像に表示されているのはカロリー貯金画面です。今までの貯金や摂取、消費カロリーがすぐにわかるようになっています。またこの画面からカロリーの入力画面には簡単に移ることが出来ます。</p>-->
+<!--                </div>-->
+<!--                <div class="col-md-5">-->
+<!--                    <img src="../assets/topPage.png" class="img-fluid" alt="Responsive image">-->
+<!--                </div>-->
+<!--            </div>&lt;!&ndash; /.row featurette &ndash;&gt;-->
+<!--            <hr class="featurette-divider  mt-5">-->
+<!--        </div>&lt;!&ndash; /.container &ndash;&gt;-->
+<!--        <footer class="container">-->
+<!--            <div class="text-center">-->
+<!--                <div class="sosyal">-->
+<!--                    <a href="https://twitter.com/acsys_calorie" class="twitter">acsys公式Twitter</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <p class="float-right"><a href="/" class="btn btn-outline-success">トップに戻る</a></p>-->
+<!--            <p>2020 麻生ビジネス専門学校情報工学科2班<br>-->
+<!--                お問い合わせ:1701017@st.asojuku.ac.jp</p>-->
+<!--        </footer>&lt;!&ndash; /.footer &ndash;&gt;-->
     </div>
 </template>
 
