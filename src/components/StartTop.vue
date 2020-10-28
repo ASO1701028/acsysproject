@@ -54,28 +54,31 @@
             <!-- スクロールスパイ -->
             <div class="scroll">
                 <b-navbar toggleable="lg" type="dark"  variant="dark" class=" align-bottom fixed-bottom">
-                    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-                        <b-navbar-toggle target="moku"></b-navbar-toggle>
-                        <b-collapse id="moku" is-nav>
-                            <ul class="nav nav-pills flex-column flex-lg-row ml-auto">
-                                <li class="nav-item"><a class="nav-link" href="#page1">現在の貯金</a> </li>
-                                <li class="nav-item"><a class="nav-link" href="#page2">摂取カロリー登録</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#page3">消費カロリー登録</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#page4">カレンダー画面</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#page5">統計画面</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#page6">トレーニング画面</a></li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">TOP</a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#menu1">メニュー</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </b-collapse>
-                    </nav>
+                    <div class="collapse navbar-collapse justify-content-center">
+                        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+                            <b-navbar-toggle target="moku"></b-navbar-toggle>
+                            <b-collapse id="moku" is-nav>
+                                <ul class="nav nav-pills flex-column flex-lg-row ml-auto justify-content-center">
+                                    <li class="nav-item"><a class="nav-link" href="#page1">現在の貯金</a> </li>
+                                    <li class="nav-item"><a class="nav-link" href="#page2">摂取カロリー登録</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#page3">消費カロリー登録</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#page4">カレンダー画面</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#page5">統計画面</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#page6">トレーニング画面</a></li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">TOP</a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#menu1">メニュー</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </b-collapse>
+                        </nav>
+                    </div>
                 </b-navbar>
                 <div class="container py-2">
                     <div id="page1">
+                        <hr class="featurette-divider  mt-5">
                         <h3>現在の貯金</h3>
                         <ul>
                             <li>摂取カロリーと消費カロリーの差分です。（摂取が多いと「＋」、消費が多いと「-」）</li>
@@ -149,6 +152,7 @@
                     <p>あ</p>
                 </div>
             </div>
+        </div>
 
 <!--            <hr class="featurette-divider  mt-5 pb-5">-->
 
@@ -213,5 +217,9 @@
     }
     .twitter:hover {
         background-color: #1397D8;
+    }
+    /*navボタン文字塗りつぶし*/
+    .nav-link{
+        color:white;
     }
 </style>
