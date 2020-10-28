@@ -17,6 +17,8 @@ import NotFound from "../components/NotFound";
 // store
 import Store from '../store/index'
 import UpdateInformation from "../components/UpdateInformation";
+import UserReissue from "../components/UserReissue";
+import UserMessage from "../components/UserMessage";
 
 Vue.use(Router)
 
@@ -39,6 +41,24 @@ const router = new Router({
             path: '/login',
             name: 'login',
             component: UserLogin,
+            meta: {
+                isPublic: true
+            }
+        },
+        {
+            //アカウント再発行
+            path: '/reissue',
+            name: '/reissue',
+            component: UserReissue,
+            meta: {
+                isPublic: true
+            }
+        },
+        {
+            //mailを飛ばした先
+            path: '/message',
+            name: '/message',
+            component: UserMessage,
             meta: {
                 isPublic: true
             }
