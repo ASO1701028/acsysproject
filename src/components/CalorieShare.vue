@@ -10,10 +10,6 @@
                     <label for="detail" class="col-sm-3  col-form-label text-right col-auto" >SNSで共有する内容</label>
                     <input type="text" class="col-sm-7 col-auto form-control ml-xs-5 " id="detail" maxlength="280" v-model="TweetDetail">
                 </span>
-                <span class="form-group row mx-auto">
-                    <label for="detail" class="col-sm-3  col-form-label text-right col-auto" >ハッシュタグ</label>
-                    <input type="text" class="col-sm-7 col-auto form-control ml-xs-5 " id="hashtag" maxlength="280" v-model="HashTag">
-                </span>
             </div>
             <div class="form-group col text-center">
                 <button class="btn btn-success btn-lg mx-auto col-md-offset-3 mt-4 " @click="twitterShare">ツイッターでシェアする</button>
@@ -33,7 +29,7 @@
         },methods:{
             twitterShare(){
                 //シェアするためのtwitterの画面を設定（textareaに記載された内容付きで）
-                var shareURL = 'https://twitter.com/intent/tweet?text=' + this.TweetDetail + "%20%23" + this.HashTag;
+                var shareURL = 'https://twitter.com/intent/tweet?text=' + this.TweetDetail + "%20%23acsys" ;
                 //シェア用の画面へ移行
                 window.open(shareURL,null,'left=350,top=200,width=700,height=550')
                 // location.href = shareURL

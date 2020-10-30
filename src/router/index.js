@@ -13,10 +13,12 @@ import Training from "../components/Training"
 import Statistics from "../components/Statistics"
 import UserChange from "../components/UserChange"
 import NotFound from "../components/NotFound";
+import CalorieShare from "../components/CalorieShare";
 
 // store
 import Store from '../store/index'
 import UpdateInformation from "../components/UpdateInformation";
+
 
 Vue.use(Router)
 
@@ -101,6 +103,12 @@ const router = new Router({
             meta: {
                 isPublic: true
             }
+        },
+        {
+            //投稿
+            path: '/tweet',
+            name: 'tweet',
+            component: CalorieShare,
         },
         {
             //NotFound
