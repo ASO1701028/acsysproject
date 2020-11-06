@@ -391,7 +391,6 @@
                 else {
                     SignWeight = true
                     this.SignupValidation.SignupWeightResult = ""
-
                 }
 
                 // 身長の入力フォームのバリデーション
@@ -422,7 +421,6 @@
                 else {
                     SignHeight = true
                     this.SignupValidation.SignupHeightResult = ""
-
                 }
 
                 // 氏名の入力フォームのバリデーション
