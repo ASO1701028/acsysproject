@@ -20,6 +20,9 @@ import CalorieShare from "../components/CalorieShare";
 import Store from '../store/index'
 import UpdateInformation from "../components/UpdateInformation";
 
+
+Vue.use(Router)
+
 const router = new Router({
     //#を外すためhistory
     mode: 'history',
@@ -118,7 +121,7 @@ const router = new Router({
 })
 
 Vue.use(VueAnalytics, {
-    id: 'UA-XXX-X',
+    id: 'UA-178757623-1',
     router
 })
 
