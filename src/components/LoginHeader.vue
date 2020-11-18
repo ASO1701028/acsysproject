@@ -8,9 +8,10 @@
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
-                        <b-nav-item href="/calendar">カレンダー</b-nav-item>
-                        <b-nav-item href="/statistics">統計</b-nav-item>
-                        <b-nav-item href="/training">トレーニング</b-nav-item>
+                    <b-nav-item href="/calendar">カレンダー</b-nav-item>
+                    <b-nav-item href="/statistics">統計</b-nav-item>
+                    <b-nav-item href="/training">トレーニング</b-nav-item>
+<!--                    <b-nav-item href="/tweet">Twitterに投稿</b-nav-item>-->
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">

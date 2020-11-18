@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueAnalytics from 'vue-analytics'
 
 // components
 import StartTop from "../components/StartTop"
@@ -13,12 +14,14 @@ import Training from "../components/Training"
 import Statistics from "../components/Statistics"
 import UserChange from "../components/UserChange"
 import NotFound from "../components/NotFound";
+import CalorieShare from "../components/CalorieShare";
 
 // store
 import Store from '../store/index'
 import UpdateInformation from "../components/UpdateInformation";
 import UserReissue from "../components/UserReissue";
 import UserMessage from "../components/UserMessage";
+
 
 Vue.use(Router)
 
@@ -123,12 +126,23 @@ const router = new Router({
             }
         },
         {
+            //投稿
+            path: '/tweet',
+            name: 'tweet',
+            component: CalorieShare,
+        },
+        {
             //NotFound
             path: "/*",
             name: 'notfound',
             component: NotFound,
         },
     ]
+})
+
+Vue.use(VueAnalytics, {
+    id: 'UA-178757623-1',
+    router
 })
 
 // metaかトークンがないとログインに遷移する
