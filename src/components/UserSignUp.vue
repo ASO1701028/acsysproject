@@ -71,11 +71,11 @@
                 <label id="purpose" class="col-3 col-form-label text-right">目標体重</label><p>
                 <div class="form-check mt-2 ml-3 col-2">
                     <input class="form-check-input" type="radio" name="purpose" id="increase" value="増加" v-model="form.account_purpose">
-                    <label class="form-check-label" for="male">増加</label>
+                    <label class="form-check-label" for="increase">増加</label>
                 </div>
                 <div class="form-check mt-2 col-2">
                     <input class="form-check-input" type="radio" name="purpose" id="decrease" value="減少" v-model="form.account_purpose" checked="checked">
-                    <label class="form-check-label" for="female">減少</label>
+                    <label class="form-check-label" for="decrease">減少</label>
                 </div>
             </div>
             <p class="text-danger text-center h5 col-9">
@@ -466,7 +466,7 @@
                         //登録時
                         this.$store.commit('tokenUpdate',check)
                         await this.$router.replace("/savecalorie")
-                    }else {　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+                    }else {
                         //エラーや存在しなかった場合
                         console.log("アカウントが存在しないもしくわエラー")
                         alert("エラーが発生しました。もう一度やり直してください")

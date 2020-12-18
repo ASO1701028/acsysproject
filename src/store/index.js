@@ -16,6 +16,7 @@ export default new Vuex.Store({
         accountWeight:'',
         accountActiveLevel:'',
         accountStartDay:'',
+        accountPurpose:'',
     },
 
     mutations:{
@@ -30,6 +31,7 @@ export default new Vuex.Store({
             state.accountHeight = ""
             state.accountWeight = ""
             state.accountActiveLevel = ""
+            state.accountPurpose = ""
         },
         accountUpdate(state,data){
             state.accountName = data.name
@@ -39,6 +41,7 @@ export default new Vuex.Store({
             state.accountWeight = data.weight
             state.accountActiveLevel = data.activlevel
             state.accountStartDay = data.startday
+            state.accountPurpose = data.purpose
         },
     },
 
